@@ -1,0 +1,54 @@
+# 数据路径
+#IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/irisdata/iris.csv"
+IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/个贷违约/train_internet.csv"
+#IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/Breast/BreastTissue.csv"
+# 特征/标签列名
+
+IRIS_FEATURE_COLS: ['total_loan', 'year_of_loan', 'interest',
+                    'monthly_payment', 'house_exist',
+                    'house_loan_status', 'censor_status',
+                    'policy_code', 'f0', 'f1', 'f2', 'f3']
+
+IRIS_LABEL_COL: "is_default"
+# 数据集划分参数
+TEST_SIZE: 0.15
+VAL_SIZE: 0.15
+USE_STRATIFIED: true
+RANDOM_SEED: 42
+
+#缺失值处理参数
+#缺失值处理方式
+ISNULL_PROCESS: "mean_cols"
+#缺失值填充值
+FILL_PROCESS: None
+#字段名
+COLUMNS: ['loan_id', 'user_id', 'total_loan', 'year_of_loan', 'interest',
+       'monthly_payment', 'house_exist', 'house_loan_status', 'censor_status',
+       'marriage', 'offsprings', 'use', 'post_code', 'region',
+       'debt_loan_ratio', 'del_in_18month', 'scoring_low', 'scoring_high',
+       'pub_dero_bankrup', 'early_return', 'early_return_amount',
+       'early_return_amount_3mon', 'recircle_b', 'recircle_u',
+       'initial_list_status', 'title', 'policy_code', 'f0', 'f1', 'f2', 'f3',
+       'f4', 'f5']
+
+
+#异常值处理
+VALID_COLS: [  'interest','monthly_payment',
+                'post_code', 'scoring_high','scoring_low']
+#自定义阈值
+THRESHOLD: 3
+#异常值检测方法
+METHOD: "iqr" #z_socre\std\iqr,两种z_socre\std方法类似
+#异常值处理方法
+PROCESE_OUTLIERS_METHOD: "del_outlier"
+#异常值自定义填充值
+FILL_VALUE: None
+
+#去重处理
+#subset: 这个参数允许在指定基于哪些列来检查重复项，默认为所有列。
+SUBSET: ["post_code","debt_loan_ratio","recircle_u",
+          'f0', 'f1', 'f2', 'f3','f4', 'f5']
+ #keep: 控制如何处理重复项，默认值为'first'，表示保留每个重复组的第一个出现。
+KEEP: "first"
+
+

@@ -1,0 +1,85 @@
+{
+    "split_id": "b3ceb619-992a-44b8-8afc-1480268c1d1c_split_20260311_104744",
+    "dataset_id": "b3ceb619-992a-44b8-8afc-1480268c1d1c",
+    "label_column": "MEDV",
+    "label_mapping": null,
+    "feature_encoding_mapping": {
+        "CRIM": "数值列（无编码，标准化）",
+        "ZN": "数值列（无编码，标准化）",
+        "INDUS": "数值列（无编码，标准化）",
+        "CHAS": "数值列（无编码，标准化）",
+        "NOX": "数值列（无编码，标准化）",
+        "RM": "数值列（无编码，标准化）",
+        "AGE": "数值列（无编码，标准化）",
+        "DIS": "数值列（无编码，标准化）",
+        "RAD": "数值列（无编码，标准化）",
+        "TAX": "数值列（无编码，标准化）",
+        "PTRATIO": "数值列（无编码，标准化）",
+        "B": "数值列（无编码，标准化）",
+        "LSTAT": "数值列（无编码，标准化）"
+    },
+    "feature_encoding": [
+        "numeric__CRIM",
+        "numeric__ZN",
+        "numeric__INDUS",
+        "numeric__CHAS",
+        "numeric__NOX",
+        "numeric__RM",
+        "numeric__AGE",
+        "numeric__DIS",
+        "numeric__RAD",
+        "numeric__TAX",
+        "numeric__PTRATIO",
+        "numeric__B",
+        "numeric__LSTAT"
+    ],
+    "all_feature_cols": [
+        "CRIM",
+        "ZN",
+        "INDUS",
+        "CHAS",
+        "NOX",
+        "RM",
+        "AGE",
+        "DIS",
+        "RAD",
+        "TAX",
+        "PTRATIO",
+        "B",
+        "LSTAT"
+    ],
+    "numeric_cols": [
+        "CRIM",
+        "ZN",
+        "INDUS",
+        "CHAS",
+        "NOX",
+        "RM",
+        "AGE",
+        "DIS",
+        "RAD",
+        "TAX",
+        "PTRATIO",
+        "B",
+        "LSTAT"
+    ],
+    "onehot_cols": [],
+    "ordinal_cols": [],
+    "split_time": "2026-03-11 10:47:44",
+    "data_shape": {
+        "train": [
+            303,
+            13
+        ],
+        "val": [
+            101,
+            13
+        ],
+        "test": [
+            102,
+            13
+        ]
+    },
+    "preprocessor_path": "./uploads\\split_datasets\\b3ceb619-992a-44b8-8afc-1480268c1d1c_split_20260311_104744\\preprocessor.pkl",
+    "label_encoder_path": null
+}

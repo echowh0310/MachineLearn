@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机器学习算法平台 - API前端</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.2/dist/axios.min.js"></script>
+    <style>
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        .step-nav {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .step-item {
+            text-align: center;
+            position: relative;
+        }
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #e0e0e0;
+            color: #666;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        .step-item.active .step-number {
+            background: #007bff;
+            color: white;
+            transform: scale(1.1);
+        }
+        .step-item.completed .step-number {
+            background: #28a745;
+            color: white;
+        }
+        .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+        .step-item.active::after,
+        .step-item.completed::after {
+            background: #007bff;
+        }
+        .step-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: #6c757d;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .alert {
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        .column-config {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .column-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+        .result-section {
+            background: #e8f5e8;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            border-top-color: #667eea;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .json-input {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">机器学习算法平台 - API前端</h1>
+
+        <!-- Step Navigation -->
+        <div class="step-nav mb-5">
+            <div class="row">
+                <div class="col step-item active" id="step1-nav">
+                    <div class="step-number">1</div>
+                    <div>上传数据集</div>
+                </div>
+                <div class="col step-item" id="step2-nav">
+                    <div class="step-number">2</div>
+                    <div>查看数据集</div>
+                </div>
+                <div class="col step-item" id="step3-nav">
+                    <div class="step-number">3</div>
+                    <div>数据处理</div>
+                </div>
+                <div class="col step-item" id="step4-nav">
+                    <div class="step-number">4</div>
+                    <div>特征编码和数据集划分</div>
+                </div>
+                <div class="col step-item" id="step5-nav">
+                    <div class="step-number">5</div>
+                    <div>模型训练与评估</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Upload Dataset -->
+        <div class="step-content" id="step1">
+            <h2>1. 上传数据集</h2>
+            <form id="uploadForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">数据集信息</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="form-label" for="file">选择数据集文件</label>
+                                    <input type="file" class="form-control" id="file" name="file" accept=".csv,.xlsx,.json" required>
+                                    <div class="form-text">支持 CSV、XLSX、JSON 格式</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="outliers_method">异常值检测方法</label>
+                                    <select class="form-select" id="outliers_method" name="outliers_method">
+                                        <option value="iqr">IQR</option>
+                                        <option value="std">标准差</option>
+                                        <option value="z_score">Z分数</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="outliers_threshold">异常值检测阈值</label>
+                                    <input type="number" class="form-control" id="outliers_threshold" name="outliers_threshold" value="1.5" step="0.1">
+                                    <div class="form-text">IQR建议1.5，Z分数建议3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <span id="uploadBtnText">上传并验证数据集</span>
+                            <span class="loading" id="uploadLoading" style="display:none;"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 2: View Dataset -->
+        <div class="step-content" id="step2" style="display:none;">
+            <h2>2. 查看数据集信息</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">数据集基本信息</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>数据集ID:</strong> <span id="datasetId"></span></p>
+                            <p><strong>原始文件名:</strong> <span id="originalFilename"></span></p>
+                            <p><strong>文件大小:</strong> <span id="fileSize"></span></p>
+                            <p><strong>上传时间:</strong> <span id="uploadTime"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>总行数:</strong> <span id="totalRows"></span></p>
+                            <p><strong>总列数:</strong> <span id="totalColumns"></span></p>
+                            <p><strong>重复行数:</strong> <span id="duplicate_rows"></span></p>
+                            <p><strong>上传文件名:</strong> <span id="storedfilename"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">列详细信息</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>列名</th>
+                                    <th>数据类型</th>
+                                    <th>非空值</th>
+                                    <th>空值</th>
+                                    <th>唯一值</th>
+                                    <th>异常值</th>
+                                    <th>异常值范围</th>
+                                    <th>前五个数据</th>
+                                </tr>
+                            </thead>
+                            <tbody id="columnsTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-secondary" onclick="previousStep(2)">上一步</button>
+                    <button class="btn btn-primary float-end" onclick="nextStep(2)">下一步</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Data Processing -->
+        <div class="step-content" id="step3" style="display:none;">
+            <h2>3. 数据处理</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">处理配置</h5>
+                </div>
+                <div class="card-body">
+                    <!-- 列选择 -->
+                    <h6>选择要处理的列</h6>
+                    <div class="mb-4">
+                        <div class="form-group">
+                            <label class="form-label" for="columns_to_process">请选择需要处理的列（按住Ctrl可多选）</label>
+                            <select multiple class="form-select" id="columns_to_process" style="height: 150px;">
+                                <!-- Dynamic options will be added here -->
+                            </select>
+                            <div class="form-text">至少选择一列进行处理</div>
+                        </div>
+                    </div>
+
+                    <h6>处理方式选择</h6>
+                    <div class="mb-4">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="process_type" id="process_type_all" value="all" checked>
+                            <label class="form-check-label" for="process_type_all">所有选择的列统一处理</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="process_type" id="process_type_column" value="column">
+                            <label class="form-check-label" for="process_type_column">列级自定义处理</label>
+                        </div>
+                    </div>
+
+                    <!-- 所有列统一处理配置 -->
+                    <div id="allColumnsConfig" class="mb-4">
+                        <h6>所有选择的列统一处理配置</h6>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="all_null_method">空值处理方法</label>
+                                    <select class="form-select" id="all_null_method">
+                                        <option value="mean_cols">均值填充</option>
+                                        <option value="median_cols">中位数填充</option>
+                                        <option value="mode_cols">众数填充</option>
+                                        <option value="fill_cols">指定值填充</option>
+                                        <option value="missing_all_cols">删除全空行</option>
+                                        <option value="missing_50%_cols">删除空值超过50%的行</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="all_null_fill">空值填充值</label>
+                                    <input type="number" class="form-control" id="all_null_fill" value="0">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="all_outliers_method">异常值检测方法</label>
+                                    <select class="form-select" id="all_outliers_method">
+                                        <option value="iqr">IQR</option>
+                                        <option value="std">标准差</option>
+                                        <option value="z_score">Z分数</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="all_outliers_threshold">异常值检测阈值</label>
+                                    <input type="number" class="form-control" id="all_outliers_threshold" value="1.5" step="0.1">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="all_outliers_process_method">异常值处理方法</label>
+                                    <select class="form-select" id="all_outliers_process_method">
+                                        <option value="save_outlier">保留异常值</option>
+                                        <option value="del_outlier">删除异常值</option>
+                                        <option value="fill_outlier">填充异常值</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="all_outliers_fill">异常值填充值</label>
+                                    <input type="number" class="form-control" id="all_outliers_fill" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 列级自定义处理配置 -->
+                    <div id="columnConfig" class="mb-4" style="display:none;">
+                        <h6>列级自定义处理配置</h6>
+                        <div id="columnsConfigContainer"></div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-secondary" onclick="previousStep(3)">上一步</button>
+                    <button class="btn btn-primary float-end" onclick="processData()">执行数据处理</button>
+                </div>
+            </div>
+
+            <div id="processingResults" class="result-section" style="display:none;">
+                <h5>处理结果</h5>
+                <div id="processSummary"></div>
+            </div>
+        </div>
+
+        <!-- Step 4: Dataset Splitting -->
+        <div class="step-content" id="step4" style="display:none;">
+            <h2>4. 数据集特征编码及其划分</h2>
+            <form id="splitForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">划分配置</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="label_column">标签列</label>
+                                    <select class="form-select" id="label_column" name="label_column" required>
+                                        <!-- Dynamic options will be added here -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="test_size">测试集比例</label>
+                                    <input type="number" class="form-control" id="test_size" name="test_size" value="0.2" min="0.05" max="0.5" step="0.05" required>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="val_size">验证集比例</label>
+                                    <input type="number" class="form-control" id="val_size" name="val_size" value="0.2" min="0" max="0.4" step="0.05" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="use_stratified">是否分层抽样</label>
+                                    <select class="form-select" id="use_stratified" name="use_stratified">
+                                        <option value="true">是</option>
+                                        <option value="false">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="feature_cols">特征列 (多选)</label>
+                                    <select multiple class="form-select" id="feature_cols" name="feature_cols" style="height: 150px;" required>
+                                        <!-- Dynamic options will be added here -->
+                                    </select>
+                                    <div class="form-text">按住 Ctrl 键可多选</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="onehot_encode_cols">独热编码列</label>
+                                            <select multiple class="form-select" id="onehot_encode_cols" name="onehot_encode_cols" style="height: 100px;">
+                                                <!-- Dynamic options will be added here -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="ordinal_encode_cols">序数编码列</label>
+                                            <select multiple class="form-select" id="ordinal_encode_cols" name="ordinal_encode_cols" style="height: 100px;">
+                                                <!-- Dynamic options will be added here -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label" for="is_standard">是否标准化特征</label>
+                                    <select class="form-select" id="is_standard" name="is_standard">
+                                        <option value="true">是</option>
+                                        <option value="false">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="processed_ID">处理后数据集ID</label>
+                                    <input type="text" class="form-control" id="processed_ID" name="processed_ID" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="class_weight">类别权重</label>
+                                    <select class="form-select" id="class_weight" name="class_weight">
+                                        <option value="balanced">balanced</option>
+                                        <option value="none">none</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="remainder">编码器剩余列处理方式</label>
+                                    <select class="form-select" id="remainder" name="remainder">
+                                        <option value="passthrough">passthrough</option>
+                                        <option value="drop">drop</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-secondary" onclick="previousStep(4)">上一步</button>
+                        <button type="submit" class="btn btn-primary float-end">执行划分</button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="splitResults" class="result-section" style="display:none;">
+                <h5>划分结果</h5>
+                <div id="splitSummary"></div>
+            </div>
+        </div>
+
+        <!-- Step 5: Model Training and Evaluation -->
+        <div class="step-content" id="step5" style="display:none;">
+            <h2>5. 模型训练与评估</h2>
+            <form id="trainForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">训练配置</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="problem_type">问题类型</label>
+                                    <select class="form-select" id="problem_type" name="problem_type" required>
+                                        <option value="classification">分类</option>
+                                        <option value="regression">回归</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="model_type">模型类型</label>
+                                    <select class="form-select" id="model_type" name="model_type" required>
+                                         <!-- 分类模型选项 -->
+                                        <optgroup label="分类模型">
+                                            <option value="random_forest">随机森林</option>
+                                            <option value="logistic_regression">逻辑回归</option>
+                                            <option value="knn">K近邻分类</option>
+                                            <option value="decision_tree">决策树分类</option>
+                                            <option value="Ga_naive_bayes">高斯贝叶斯</option>
+<!--                                            <option value="Mu_naive_bayes">多项式贝叶斯</option>-->
+                                            <option value="Be_naive_bayes">伯努利贝叶斯</option>
+                                            <option value="svm">支持向量机分类</option>
+                                            <option value="gboost">梯度提升分类</option>
+                                            <option value="xgboost">XGBoost分类</option>
+                                            <option value="lightgbm">LightGBM分类</option>
+                                            <option value="adaboost">AdaBoost分类</option>
+                                            <option value="mlp">多层感知机分类</option>
+                                        </optgroup>
+                                        <!-- 回归模型选项 -->
+                                        <optgroup label="回归模型">
+                                            <option value="random_forest">随机森林</option>
+                                            <option value="LR">线性回归</option>
+                                            <option value="knn">K近邻回归</option>
+                                            <option value="decision_tree">决策树回归</option>
+                                            <option value="svm">支持向量机回归</option>
+                                            <option value="lasso">Lasso回归</option>
+                                            <option value="gboost">梯度提升回归</option>
+                                            <option value="xgboost">XGBoost回归</option>
+                                            <option value="lightgbm">LightGBM回归</option>
+                                            <option value="adaboost">AdaBoost回归</option>
+                                            <option value="mlp">多层感知机回归</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="train_split_id">划分ID (split_id)</label>
+                                    <input type="text" class="form-control" id="train_split_id" name="train_split_id" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="train_dataset_id">数据集ID (dataset_id)</label>
+                                    <input type="text" class="form-control" id="train_dataset_id" name="train_dataset_id" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="model_params">模型参数 (JSON格式)</label>
+                                    <textarea class="form-control json-input" id="model_params" name="model_params" rows="3" placeholder='{"n_estimators": 100, "max_depth": 10}'></textarea>
+                                    <div class="form-text">可选，不设置则使用默认参数</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-secondary" onclick="previousStep(5)">上一步</button>
+                        <button type="submit" class="btn btn-primary float-end">开始训练</button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="trainResults" class="result-section" style="display:none;">
+                <h5>训练结果</h5>
+                <div id="trainSummary"></div>
+            </div>
+        </div>
+
+        <!-- Message Display -->
+        <div id="message" class="alert" style="display:none;"></div>
+    </div>
+
+    <script>
+        // Global variables
+        let datasetId = null;
+        let processedId = null;
+        let columnsInfo = null;
+        let splitId = null;
+        let trainResult = null;
+
+        // Step 1: Upload Dataset
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const uploadBtnText = document.getElementById('uploadBtnText');
+            const uploadLoading = document.getElementById('uploadLoading');
+
+            // Show loading state
+            uploadBtnText.textContent = '上传中...';
+            uploadLoading.style.display = 'inline-block';
+
+            const formData = new FormData();
+            formData.append('file', document.getElementById('file').files[0]);
+            formData.append('outliers_method', document.getElementById('outliers_method').value);
+            formData.append('outliers_threshold', document.getElementById('outliers_threshold').value);
+
+            try {
+                const response = await axios.post('http://localhost:8005/api/v1/data/upload', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+
+                if (response.data.code === 200) {
+                    datasetId = response.data.data.dataset_id;
+                    const datasetMeta = response.data.data;
+                    columnsInfo = datasetMeta.validate_report.columns_info;
+
+                    showMessage('数据集上传成功！', 'success');
+                    displayDatasetInfo(datasetMeta);
+                    nextStep(1);
+                } else {
+                    showMessage('上传失败：' + response.data.msg, 'danger');
+                }
+            } catch (error) {
+                showMessage('上传失败：' + (error.response?.data?.detail || error.message), 'danger');
+            } finally {
+                // Hide loading state
+                uploadBtnText.textContent = '上传并验证数据集';
+                uploadLoading.style.display = 'none';
+            }
+        });
+
+        // Display Dataset Information
+        function displayDatasetInfo(datasetMeta) {
+            document.getElementById('datasetId').textContent = datasetMeta.dataset_id;
+            document.getElementById('originalFilename').textContent = datasetMeta.original_file_name;
+            document.getElementById('fileSize').textContent = (datasetMeta.file_size / (1024 * 1024)).toFixed(2) + ' MB';
+            document.getElementById('uploadTime').textContent = datasetMeta.upload_time;
+            document.getElementById('totalRows').textContent = datasetMeta.validate_report.total_rows;
+            document.getElementById('totalColumns').textContent = datasetMeta.validate_report.total_columns;
+            document.getElementById('duplicate_rows').textContent = datasetMeta.validate_report.duplicate_rows;
+            document.getElementById('storedfilename').textContent = datasetMeta.stored_file_name;
+
+
+
+            // Populate columns table
+            const columnsTable = document.getElementById('columnsTable');
+            columnsTable.innerHTML = '';
+
+            for (const [colName, info] of Object.entries(columnsInfo)) {
+                const row = columnsTable.insertRow();
+                row.insertCell(0).textContent = colName;
+                row.insertCell(1).textContent = info.dtype;
+                row.insertCell(2).textContent = info.non_null_count;
+                row.insertCell(3).textContent = info.null_count;
+                row.insertCell(4).textContent = info.unique_values;
+                row.insertCell(5).textContent = info.outliers_count || 0;
+                row.insertCell(6).textContent = info.nulloutliers_range || NaN ;
+                row.insertCell(7).textContent = info.sample_values ;
+            }
+        }
+
+        // Display Column Configurations for Column-wise Processing
+        function displayColumnConfigs() {
+            const columnsConfigContainer = document.getElementById('columnsConfigContainer');
+            columnsConfigContainer.innerHTML = '';
+
+            // Get selected columns
+            const selectedColumns = Array.from(document.getElementById('columns_to_process').selectedOptions).map(option => option.value);
+
+            // If no columns selected, show all columns for configuration
+            const columnsToConfigure = selectedColumns.length > 0 ? selectedColumns : Object.keys(columnsInfo);
+
+            for (const colName of columnsToConfigure) {
+                const info = columnsInfo[colName];
+                const configDiv = document.createElement('div');
+                configDiv.className = 'column-config';
+                configDiv.setAttribute('data-col', colName); // Add data-col attribute for easy selection
+                configDiv.innerHTML = `
+                    <div class="column-title">${colName} (${info.dtype})</div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-label">空值处理</label>
+                                <select class="form-select col-null-method" data-col="${colName}">
+                                    <option value="mean_cols">均值填充</option>
+                                    <option value="median_cols">中位数填充</option>
+                                    <option value="mode_cols">众数填充</option>
+                                    <option value="fill_cols">指定值填充</option>
+                                    <option value="missing_all_cols">删除全空行</option>
+                                    <option value="missing_50%_cols">删除空值超过50%的行</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">空值填充值</label>
+                                <input type="number" class="form-control col-null-fill" data-col="${colName}" value="0">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-label">异常值检测方法</label>
+                                <select class="form-select col-outliers-method" data-col="${colName}">
+                                    <option value="iqr">IQR</option>
+                                    <option value="std">标准差</option>
+                                    <option value="z_score">Z分数</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">异常值检测阈值</label>
+                                <input type="number" class="form-control col-outliers-threshold" data-col="${colName}" value="1.5" step="0.1">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">异常值处理方法</label>
+                                <select class="form-select col-outliers-process" data-col="${colName}">
+                                    <option value="save_outlier">保留异常值</option>
+                                    <option value="del_outlier">删除异常值</option>
+                                    <option value="fill_outlier">填充异常值</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">异常值填充值</label>
+                                <input type="number" class="form-control col-outliers-fill" data-col="${colName}" value="0">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                columnsConfigContainer.appendChild(configDiv);
+            }
+        }
+
+        // Step 3: Process Data
+        async function processData() {
+            const processType = document.querySelector('input[name="process_type"]:checked').value;
+
+            try {
+                if (processType === 'all') {
+                    // 所有列统一处理
+                    await processAllColumns();
+                } else {
+                    // 列级自定义处理
+                    await processColumns();
+                }
+            } catch (error) {
+                showMessage('处理失败：' + (error.response?.data?.detail || error.message), 'danger');
+            }
+        }
+
+        // Process All Columns
+        async function processAllColumns() {
+            // Get selected columns
+            const selectedColumns = Array.from(document.getElementById('columns_to_process').selectedOptions).map(option => option.value);
+
+            // Validate at least one column is selected
+            if (selectedColumns.length === 0) {
+                showMessage('请至少选择一列进行处理', 'warning');
+                return;
+            }
+
+            const requestBody = {
+                cols: selectedColumns,
+                null_process_method: document.getElementById('all_null_method').value,
+                null_fill_value: parseFloat(document.getElementById('all_null_fill').value),
+                outliers_process_method: document.getElementById('all_outliers_process_method').value,
+                outliers_fill_value: parseFloat(document.getElementById('all_outliers_fill').value),
+                outliers_method: document.getElementById('all_outliers_method').value,
+                outliers_threshold: parseFloat(document.getElementById('all_outliers_threshold').value)
+            };
+
+            try {
+                const response = await axios.post(`http://localhost:8005/api/v1/data/${datasetId}/process/all`, requestBody);
+
+                if (response.data && response.data.code === 200 && response.data.data) {
+                    processedId = response.data.data.processed_ID;
+                    displayProcessingResults(response.data.data);
+                    showMessage('数据处理成功！', 'success');
+                } else {
+                    showMessage('处理失败：' + (response.data?.msg || '未知错误'), 'danger');
+                }
+            } catch (error) {
+                showMessage('处理失败：' + (error.response?.data?.msg || error.message), 'danger');
+            }
+        }
+
+        // Process Columns (Column-wise)
+        async function processColumns() {
+            // Get selected columns
+            const selectedColumns = Array.from(document.getElementById('columns_to_process').selectedOptions).map(option => option.value);
+
+            // Validate at least one column is selected
+            if (selectedColumns.length === 0) {
+                showMessage('请至少选择一列进行处理', 'warning');
+                return;
+            }
+
+            const columnsConfigs = [];
+
+            // Collect configurations only for selected columns
+            selectedColumns.forEach(colName => {
+                const configDiv = document.querySelector(`.column-config[data-col="${colName}"]`);
+                if (configDiv) {
+                    const nullMethod = configDiv.querySelector('.col-null-method').value;
+                    const nullFill = parseFloat(configDiv.querySelector('.col-null-fill').value);
+                    const outliersMethod = configDiv.querySelector('.col-outliers-method').value;
+                    const outliersThreshold = parseFloat(configDiv.querySelector('.col-outliers-threshold').value);
+                    const outliersProcess = configDiv.querySelector('.col-outliers-process').value;
+                    const outliersFill = parseFloat(configDiv.querySelector('.col-outliers-fill').value);
+
+                    columnsConfigs.push({
+                        col_name: colName,
+                        null_process_method: nullMethod,
+                        null_fill_value: nullFill,
+                        outliers_method: outliersMethod,
+                        outliers_threshold: outliersThreshold,
+                        outliers_process_method: outliersProcess,
+                        outliers_fill_value: outliersFill
+                    });
+                }
+            });
+
+            // 如果没有收集到任何列配置，显示错误信息
+            if (columnsConfigs.length === 0) {
+                showMessage('没有找到任何列配置，请确保已选择列并填写配置', 'warning');
+                return;
+            }
+
+            const requestBody = {
+                columns_config: columnsConfigs,
+                global_null_process_method: document.getElementById('all_null_method').value,
+                global_outliers_method: document.getElementById('all_outliers_method').value,
+                global_outliers_threshold: parseFloat(document.getElementById('all_outliers_threshold').value),
+                global_outliers_process_method: document.getElementById('all_outliers_process_method').value
+            };
+
+            try {
+                const response = await axios.post(`http://localhost:8005/api/v1/data/${datasetId}/columns/process`, requestBody);
+
+                if (response.data && response.data.code === 200 && response.data.data) {
+                    processedId = response.data.data.processed_ID;
+                    displayProcessingResults(response.data.data);
+                    showMessage('数据处理成功！', 'success');
+                } else {
+                    showMessage('处理失败：' + (response.data?.msg || '未知错误'), 'danger');
+                }
+            } catch (error) {
+                showMessage('处理失败：' + (error.response?.data?.msg || error.message), 'danger');
+            }
+        }
+
+        // Display Processing Results
+        function displayProcessingResults(results) {
+            const processSummary = document.getElementById('processSummary');
+            const processingResults = document.getElementById('processingResults');
+
+            // 添加空值检查，确保results不为空
+            if (!results) {
+                processSummary.innerHTML = '<p class="text-danger">处理结果为空，请检查处理配置和API响应</p>';
+                processingResults.style.display = 'block';
+                return;
+            }
+
+            // 安全获取属性，避免访问不存在的属性导致错误
+            const processedID = results.processed_ID || 'N/A';
+            const processedTime = results.processed_time || 'N/A';
+            const columnsLength = results.columns ? results.columns.length : 0;
+            const processResult = results.process_result || { rows_before_process: 0, rows_after_process: 0, rows_removed: 0, rows_removed_ratio: 0 };
+            const nullProcessResult = results.null_process_result || { total_null_processed: 0, null_process_summary: { remaining_missing: {} } };
+            const outliersProcessResult = results.outliers_process_result || { total_outliers_processed: 0 };
+
+            const summaryHtml = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>处理基本信息</h6>
+                        <p>处理后数据集ID: ${processedID}</p>
+                        <p>处理时间: ${processedTime}</p>
+                        <p>处理列数: ${columnsLength}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>数据变化</h6>
+                        <p>处理前: ${processResult.rows_before_process} 行</p>
+                        <p>处理后: ${processResult.rows_after_process} 行</p>
+                        <p>删除: ${processResult.rows_removed} 行 (${(processResult.rows_removed_ratio * 100).toFixed(2)}%)</p>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h6>空值处理</h6>
+                        <p>总共处理空值: ${nullProcessResult.total_null_processed}</p>
+                        <p>剩余空值: ${JSON.stringify(nullProcessResult.null_process_summary.remaining_missing || {})}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>异常值处理</h6>
+                        <p>总共处理异常值: ${outliersProcessResult.total_outliers_processed}</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary mt-3" onclick="nextStep(3)">进入数据集特征编码和划分</button>
+            `;
+
+            processSummary.innerHTML = summaryHtml;
+            processingResults.style.display = 'block';
+        }
+
+        // Step 4: Dataset Splitting
+        document.getElementById('splitForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const splitParams = {
+                test_size: parseFloat(document.getElementById('test_size').value),
+                val_size: parseFloat(document.getElementById('val_size').value),
+                use_stratified: document.getElementById('use_stratified').value === 'true',
+                label_column: document.getElementById('label_column').value,
+                processed_ID: document.getElementById('processed_ID').value,
+                feature_cols: Array.from(document.getElementById('feature_cols').selectedOptions).map(option => option.value),
+                onehot_encode_cols: Array.from(document.getElementById('onehot_encode_cols').selectedOptions).map(option => option.value),
+                ordinal_encode_cols: Array.from(document.getElementById('ordinal_encode_cols').selectedOptions).map(option => option.value),
+                class_weight: document.getElementById('class_weight').value,
+                is_standard: document.getElementById('is_standard').value === 'true',
+                remainder: document.getElementById('remainder').value
+            };
+
+            try {
+                const response = await axios.post(`http://localhost:8005/api/v1/data/${datasetId}/split`, splitParams);
+
+                splitId = response.data.data.split_id;
+                const splitSummary = document.getElementById('splitSummary');
+                const splitResults = document.getElementById('splitResults');
+
+                const summaryHtml = `
+                    <p>划分ID: ${response.data.data.split_id}</p>
+                    <p>使用的处理后数据集ID: ${response.data.data.processed_ID_used}</p>
+                    <p>划分时间: ${response.data.data.split_time}</p>
+                    <h6>数据集统计信息</h6>
+                    <pre>${JSON.stringify(response.data.data.data_statistics, null, 2)}</pre>
+                    <p class="text-success">数据集划分成功！</p>
+                    <button class="btn btn-primary mt-3" onclick="nextStep(4)">进入模型训练与评估</button>
+                `;
+
+                splitSummary.innerHTML = summaryHtml;
+                splitResults.style.display = 'block';
+            } catch (error) {
+                showMessage('划分失败：' + (error.response?.data?.detail || error.message), 'danger');
+            }
+        });
+
+        // Step Navigation
+        function nextStep(currentStep) {
+            // Update navigation active state
+            const navItems = document.querySelectorAll('.step-item');
+            navItems.forEach(item => item.classList.remove('active', 'completed'));
+
+            if (currentStep === 1) {
+                // Step 1 -> Step 2
+                document.getElementById('step1').style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+                navItems[0].classList.add('completed');
+                navItems[1].classList.add('active');
+            } else if (currentStep === 2) {
+                // Step 2 -> Step 3
+                document.getElementById('step2').style.display = 'none';
+                document.getElementById('step3').style.display = 'block';
+                navItems[0].classList.add('completed');
+                navItems[1].classList.add('completed');
+                navItems[2].classList.add('active');
+
+                // Populate column options for feature selection and processing
+                populateColumnOptions();
+                populateProcessingColumnOptions();
+            } else if (currentStep === 3) {
+                // Step 3 -> Step 4
+                document.getElementById('step3').style.display = 'none';
+                document.getElementById('step4').style.display = 'block';
+                navItems[0].classList.add('completed');
+                navItems[1].classList.add('completed');
+                navItems[2].classList.add('completed');
+                navItems[3].classList.add('active');
+
+                // Populate column options for dataset splitting
+                populateSplitColumnOptions();
+                // Set processed ID
+                document.getElementById('processed_ID').value = processedId;
+            } else if (currentStep === 4) {
+                // Step 4 -> Step 5
+                document.getElementById('step4').style.display = 'none';
+                document.getElementById('step5').style.display = 'block';
+                navItems[0].classList.add('completed');
+                navItems[1].classList.add('completed');
+                navItems[2].classList.add('completed');
+                navItems[3].classList.add('completed');
+                navItems[4].classList.add('active');
+
+                // Set dataset ID and split ID if available
+                if (datasetId) {
+                    document.getElementById('train_dataset_id').value = datasetId;
+                }
+                if (splitId) {
+                    document.getElementById('train_split_id').value = splitId;
+                }
+            }
+        }
+
+        function previousStep(currentStep) {
+            // Update navigation active state
+            const navItems = document.querySelectorAll('.step-item');
+            navItems.forEach(item => item.classList.remove('active', 'completed'));
+
+            if (currentStep === 2) {
+                // Step 2 -> Step 1
+                document.getElementById('step2').style.display = 'none';
+                document.getElementById('step1').style.display = 'block';
+                navItems[0].classList.add('active');
+            } else if (currentStep === 3) {
+                // Step 3 -> Step 2
+                document.getElementById('step3').style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+                navItems[0].classList.add('completed');
+                navItems[1].classList.add('active');
+            } else if (currentStep === 4) {
+                // Step 4 -> Step 3
+                document.getElementById('step4').style.display = 'none';
+                document.getElementById('step3').style.display = 'block';
+                navItems[0].classList.add('completed');
+                navItems[1].classList.add('completed');
+                navItems[2].classList.add('active');
+            } else if (currentStep === 5) {
+                // Step 5 -> Step 4
+                document.getElementById('step5').style.display = 'none';
+                document.getElementById('step4').style.display = 'block';
+                navItems[0].classList.add('completed');
+                navItems[1].classList.add('completed');
+                navItems[2].classList.add('completed');
+                navItems[3].classList.add('active');
+            }
+        }
+
+        // Populate Column Options for Feature Selection
+        function populateColumnOptions() {
+            // This would typically be populated from the dataset columns
+            // For now, we'll just use the columnsInfo we already have
+        }
+
+        // Populate Column Options for Processing
+        function populateProcessingColumnOptions() {
+            const columnsSelect = document.getElementById('columns_to_process');
+
+            // Clear existing options
+            columnsSelect.innerHTML = '';
+
+            // Add options from columnsInfo
+            for (const [colName, info] of Object.entries(columnsInfo)) {
+                const option = document.createElement('option');
+                option.value = colName;
+                option.textContent = `${colName} (${info.dtype})`;
+                columnsSelect.appendChild(option);
+            }
+        }
+
+        // Populate Column Options for Dataset Splitting
+        function populateSplitColumnOptions() {
+            const labelColumnSelect = document.getElementById('label_column');
+            const featureColsSelect = document.getElementById('feature_cols');
+            const onehotEncodeColsSelect = document.getElementById('onehot_encode_cols');
+            const ordinalEncodeColsSelect = document.getElementById('ordinal_encode_cols');
+
+            // Clear existing options
+            labelColumnSelect.innerHTML = '';
+            featureColsSelect.innerHTML = '';
+            onehotEncodeColsSelect.innerHTML = '';
+            ordinalEncodeColsSelect.innerHTML = '';
+
+            // Add options from columnsInfo
+            for (const [colName, info] of Object.entries(columnsInfo)) {
+                const option = document.createElement('option');
+                option.value = colName;
+                option.textContent = `${colName} (${info.dtype})`;
+                labelColumnSelect.appendChild(option.cloneNode(true));
+                featureColsSelect.appendChild(option.cloneNode(true));
+                onehotEncodeColsSelect.appendChild(option.cloneNode(true));
+                ordinalEncodeColsSelect.appendChild(option.cloneNode(true));
+            }
+        }
+
+        // Show Message
+        function showMessage(message, type = 'info') {
+            const messageDiv = document.getElementById('message');
+            messageDiv.className = `alert alert-${type}`;
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Step 5: Model Training and Evaluation
+        document.getElementById('trainForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const problemType = document.getElementById('problem_type').value;
+            const modelType = document.getElementById('model_type').value;
+            const trainSplitId = document.getElementById('train_split_id').value;
+            const trainDatasetId = document.getElementById('train_dataset_id').value;
+            const modelParamsStr = document.getElementById('model_params').value;
+
+            let modelParams = {};
+            if (modelParamsStr.trim()) {
+                try {
+                    modelParams = JSON.parse(modelParamsStr);
+                } catch (error) {
+                    showMessage('模型参数格式错误，请检查JSON格式', 'danger');
+                    return;
+                }
+            }
+
+            const trainRequest = {
+                dataset_id: trainDatasetId,
+                split_id: trainSplitId,
+                model_params: modelParams
+            };
+
+            try {
+                const response = await axios.post(`http://localhost:8005/api/v1/models/${problemType}/${modelType}/train`, trainRequest);
+
+                if (response.data && response.data.code === 200 && response.data.data) {
+                    trainResult = response.data.data;
+                    displayTrainResults(trainResult);
+                    showMessage('模型训练成功！', 'success');
+                } else {
+                    showMessage('训练失败：' + (response.data?.msg || '未知错误'), 'danger');
+                }
+            } catch (error) {
+                showMessage('训练失败：' + (error.response?.data?.msg || error.message), 'danger');
+            }
+        });
+
+        // Display Training Results
+        function displayTrainResults(results) {
+            const trainSummary = document.getElementById('trainSummary');
+            const trainResults = document.getElementById('trainResults');
+
+            if (!results) {
+                trainSummary.innerHTML = '<p class="text-danger">训练结果为空，请检查训练配置和API响应</p>';
+                trainResults.style.display = 'block';
+                return;
+            }
+
+            const summaryHtml = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>训练基本信息</h6>
+                        <p>数据集ID: ${results.dataset_id || 'N/A'}</p>
+                        <p>划分ID: ${results.split_id || 'N/A'}</p>
+                        <p>问题类型: ${results.problem_type || 'N/A'}</p>
+                        <p>模型类型: ${results.model_type || 'N/A'}</p>
+                        <p>训练时间: ${results.train_time?.start_time || 'N/A'} - ${results.train_time?.end_time || 'N/A'}</p>
+                        <p>训练时长: ${results.train_time?.duration_seconds || 0} 秒</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>数据形状</h6>
+                        <p>训练集: ${results.data_shape?.train?.[0] || 0} 行, ${results.data_shape?.train?.[1] || 0} 列</p>
+                        <p>验证集: ${results.data_shape?.val?.[0] || 0} 行, ${results.data_shape?.val?.[1] || 0} 列</p>
+                        <p>测试集: ${results.data_shape?.test?.[0] || 0} 行, ${results.data_shape?.test?.[1] || 0} 列</p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h6>模型参数</h6>
+                        <pre>${JSON.stringify(results.model_params || {}, null, 2)}</pre>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h6>评估指标</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>指标</th>
+                                        <th>训练集</th>
+                                        <th>验证集</th>
+                                        <th>测试集</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${results.metrics ? `
+                                        <tr>
+                                            <td>准确率 (Accuracy)</td>
+                                            <td>${results.metrics.train.accuracy || 'N/A'}</td>
+                                            <td>${results.metrics.val.accuracy || 'N/A'}</td>
+                                            <td>${results.metrics.test.accuracy || 'N/A'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>精确率 (Precision)</td>
+                                            <td>${results.metrics.train.precision || 'N/A'}</td>
+                                            <td>${results.metrics.val.precision || 'N/A'}</td>
+                                            <td>${results.metrics.test.precision || 'N/A'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>召回率 (Recall)</td>
+                                            <td>${results.metrics.train.recall || 'N/A'}</td>
+                                            <td>${results.metrics.val.recall || 'N/A'}</td>
+                                            <td>${results.metrics.test.recall || 'N/A'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>F1值 (F1 Score)</td>
+                                            <td>${results.metrics.train.f1 || 'N/A'}</td>
+                                            <td>${results.metrics.val.f1 || 'N/A'}</td>
+                                            <td>${results.metrics.test.f1 || 'N/A'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>平均绝对误差 (MAE)</td>
+                                            <td>${results.metrics.train.mae || 'N/A'}</td>
+                                            <td>${results.metrics.val.mae || 'N/A'}</td>
+                                            <td>${results.metrics.test.mae || 'N/A'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>均方误差 (MSE)</td>
+                                            <td>${results.metrics.train.mse || 'N/A'}</td>
+                                            <td>${results.metrics.val.mse || 'N/A'}</td>
+                                            <td>${results.metrics.test.mse || 'N/A'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>均方根误差 (RMSE)</td>
+                                            <td>${results.metrics.train.rmse || 'N/A'}</td>
+                                            <td>${results.metrics.val.rmse || 'N/A'}</td>
+                                            <td>${results.metrics.test.rmse || 'N/A'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>决定系数 (R2)</td>
+                                            <td>${results.metrics.train.r2 || 'N/A'}</td>
+                                            <td>${results.metrics.val.r2 || 'N/A'}</td>
+                                            <td>${results.metrics.test.r2 || 'N/A'}</td>
+                                        </tr>
+                                    ` : '<tr><td colspan="4">无评估指标数据</td></tr>'}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                ${results.model_save_path ? `
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h6>模型保存信息</h6>
+                        <p>模型保存路径: ${results.model_save_path}</p>
+                    </div>
+                </div>
+                ` : ''}
+            `;
+
+            trainSummary.innerHTML = summaryHtml;
+            trainResults.style.display = 'block';
+        }
+
+        // Handle Process Type Change
+        document.querySelectorAll('input[name="process_type"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'all') {
+                    document.getElementById('allColumnsConfig').style.display = 'block';
+                    document.getElementById('columnConfig').style.display = 'none';
+                } else {
+                    document.getElementById('allColumnsConfig').style.display = 'none';
+                    document.getElementById('columnConfig').style.display = 'block';
+                    displayColumnConfigs();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

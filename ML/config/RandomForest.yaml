@@ -1,0 +1,60 @@
+# 数据路径
+IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/irisdata/iris.csv"
+#IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/fangjia/boston_house_prices.csv"
+#IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/suanfa/uploads/processed/b710f9d2-463a-455d-a84a-ea1f046546c4_processed_20260225_083814.csv"
+# 特征/标签列名
+IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+#IRIS_FEATURE_COLS: ['loan_id','user_id','total_loan','year_of_loan','interest','monthly_payment','class','employer_type','industry',
+#'work_year','house_exist']
+#IRIS_FEATURE_COLS: ['total_loan','year_of_loan','interest','monthly_payment']
+#IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width']
+#IRIS_FEATURE_COLS: ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+IRIS_LABEL_COL: "species"
+#IRIS_LABEL_COL: "isDefault"
+#IRIS_LABEL_COL: "MEDV"
+# 数据集划分参数
+TEST_SIZE: 0.15
+VAL_SIZE: 0.15
+USE_STRATIFIED: true
+RANDOM_SEED: 42
+
+# RandomForest模型参数
+N_ESTIMATORS: 100  # 森林中树的数量，通常越多越好
+MAX_DEPTH: 6 #控制树的最大深度，防止过拟合
+
+#
+#
+## 数据路径
+#IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/suanfa/uploads/processed/409164bf-a1a9-4c4a-99ae-b2cc9db8d056_processed_20260225_115144.csv"
+#
+## 特征/标签列名
+#IRIS_FEATURE_COLS: ['total_loan','year_of_loan','interest','monthly_payment','employer_type','industry',
+#'work_year','house_exist']
+##IRIS_FEATURE_COLS: ['total_loan','year_of_loan','interest','monthly_payment']
+#IRIS_LABEL_COL: "employer_type"
+#
+## 编码配置
+## 需要编码的特征列及编码方式：onehot(独热编码) / ordinal(序列编码)
+#ONEHOT_ENCODE_COLS: ['employer_type','industry']
+#ORDINAL_ENCODE_COLS: ['work_year', 'house_exist']
+##NUMERIC_ENCODE_COLS:
+##
+##ENCODE_COLS:
+##  employer_type: "onehot"    # 示例：雇主类型-独热编码
+##  industry: "onehot"         # 示例：行业-独热编码
+##  work_year: "ordinal"       # 示例：工作年限-序列编码
+##  house_exist: "ordinal"     # 示例：房产是否存在-序列编码
+#
+## 数据集划分参数
+#TEST_SIZE: 0.15
+#VAL_SIZE: 0.15
+#USE_STRATIFIED: true
+#RANDOM_SEED: 42
+#
+## RandomForest模型参数
+#N_ESTIMATORS: 100  # 森林中树的数量
+#MAX_DEPTH: 6       # 控制树的最大深度，防止过拟合
+#CLASS_WEIGHT: "balanced"  # 新增：解决数据不平衡
+#IS_STANDARD: False
+#REMAINDER: passthrough
+##保留未处理的列（remainder='passthrough'），删除未处理的列（remainder='drop'，默认值）

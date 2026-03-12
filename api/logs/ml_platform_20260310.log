@@ -1,0 +1,457 @@
+2026-03-10 17:00:49 - ml_platform_api - INFO - 数据集上传成功：ID=a8a16e33-793e-4272-810e-e6ad690ab579，文件名=iris.csv（存储为a9113899-89ed-427e-b99a-304466db5b07.csv）
+2026-03-10 17:00:53 - ml_platform_api - WARNING - 列species无异常值范围信息，跳过处理
+2026-03-10 17:00:53 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\a8a16e33-793e-4272-810e-e6ad690ab579_processed_20260310_170053.csv
+2026-03-10 17:00:53 - ml_platform_api - INFO - 数据集a8a16e33-793e-4272-810e-e6ad690ab579统一处理完成：处理列=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-10 17:00:54 - ml_platform_api - WARNING - 列species无异常值范围信息，跳过处理
+2026-03-10 17:00:54 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\a8a16e33-793e-4272-810e-e6ad690ab579_processed_20260310_170054.csv
+2026-03-10 17:00:54 - ml_platform_api - INFO - 数据集a8a16e33-793e-4272-810e-e6ad690ab579统一处理完成：处理列=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-10 17:01:00 - ml_platform_api - INFO - 通过processed_ID a8a16e33-793e-4272-810e-e6ad690ab579_processed_20260310_170054 匹配到文件：./uploads\processed\a8a16e33-793e-4272-810e-e6ad690ab579_processed_20260310_170054.csv
+2026-03-10 17:01:00 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-10 17:01:00 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-10 17:01:00 - ml_platform_api - INFO - 数值特征列：['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+2026-03-10 17:01:00 - ml_platform_api - INFO - 未编码文本特征列：['species']
+2026-03-10 17:01:00 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-10 17:01:00 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-10 17:01:00 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-10 17:01:00 - ml_platform_api - INFO - 特征列编码映射关系：{'sepal_length': '数值列（无编码，标准化）', 'sepal_width': '数值列（无编码，标准化）', 'petal_length': '数值列（无编码，标准化）', 'petal_width': '数值列（无编码，标准化）'}
+2026-03-10 17:01:00 - ml_platform_api - INFO - 编码后的特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:01:00 - ml_platform_api - INFO - 编码后的特征矩阵形状：(150, 4)
+2026-03-10 17:01:00 - ml_platform_api - INFO - 标签列名：species
+2026-03-10 17:01:00 - ml_platform_api - INFO - 标签列原始类型：object
+2026-03-10 17:01:00 - ml_platform_api - INFO - 标签列前5个值：['setosa', 'setosa', 'setosa', 'setosa', 'setosa']
+2026-03-10 17:01:00 - ml_platform_api - INFO - 标签映射关系：{'setosa': 0, 'versicolor': 1, 'virginica': 2}
+2026-03-10 17:01:00 - ml_platform_api - INFO - 标签编码完成，共 3 个类别
+2026-03-10 17:01:00 - ml_platform_api - INFO - 数据集类别数：3，类别列表：['setosa', 'versicolor', 'virginica']
+2026-03-10 17:01:00 - ml_platform_api - INFO - 编码后训练集特征维度：(89, 4)
+2026-03-10 17:01:00 - ml_platform_api - INFO - 编码后验证集特征维度：(30, 4)
+2026-03-10 17:01:00 - ml_platform_api - INFO - 编码后测试集特征维度：(30, 4)
+2026-03-10 17:01:00 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：a8a16e33-793e-4272-810e-e6ad690ab579 | 标签列：species | 总样本：150 | 训练集：89(59.7%) | 验证集：30(20.1%) | 测试集：30(20.1%) | 预处理数据保存路径：./uploads\split_datasets\a8a16e33-793e-4272-810e-e6ad690ab579_split_20260310_170100
+2026-03-10 17:01:04 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\a8a16e33-793e-4272-810e-e6ad690ab579_split_20260310_170100\processed_data.npz
+2026-03-10 17:01:04 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-10 17:01:04 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': 3, 'min_samples_split': 2, 'random_state': 42}
+2026-03-10 17:01:04 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：a8a16e33-793e-4272-810e-e6ad690ab579 | 划分ID：a8a16e33-793e-4272-810e-e6ad690ab579_split_20260310_170100
+2026-03-10 17:01:04 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:01:04 - ml_platform_api - INFO - random_forest模型在测试集上的得分：0.9333333333333333
+2026-03-10 17:01:05 - ml_platform_api - INFO - 特征重要性排序：
+                   特征    重要性
+numeric__petal_length 0.4816
+ numeric__petal_width 0.3797
+numeric__sepal_length 0.1251
+ numeric__sepal_width 0.0135
+2026-03-10 17:01:05 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9,
+      "precision": 0.9024,
+      "recall": 0.9,
+      "f1": 0.8997,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    2,    8 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9333,
+      "precision": 0.9333,
+      "recall": 0.9333,
+      "f1": 0.9333,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    1,    9 ]
+    ]
+}
+}
+2026-03-10 17:01:05 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\a8a16e33-793e-4272-810e-e6ad690ab579_split_20260310_170100\random_forest_model_20260310_170105.pkl
+2026-03-10 17:01:08 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\a8a16e33-793e-4272-810e-e6ad690ab579_split_20260310_170100\processed_data.npz
+2026-03-10 17:01:08 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-10 17:01:08 - ml_platform_api - INFO - 使用模型参数：{'objective': 'multi:softmax', 'n_estimators': 100, 'learning_rate': 0.1, 'random_state': 42}
+2026-03-10 17:01:08 - ml_platform_api - INFO - 开始训练xgboost模型 | 数据集ID：a8a16e33-793e-4272-810e-e6ad690ab579 | 划分ID：a8a16e33-793e-4272-810e-e6ad690ab579_split_20260310_170100
+2026-03-10 17:01:08 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:01:08 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.8667,
+      "precision": 0.875,
+      "recall": 0.8667,
+      "f1": 0.8653,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    3,    7 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9,
+      "precision": 0.9024,
+      "recall": 0.9,
+      "f1": 0.8997,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    2,    8 ]
+    ]
+}
+}
+2026-03-10 17:01:08 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\a8a16e33-793e-4272-810e-e6ad690ab579_split_20260310_170100\xgboost_model_20260310_170108.pkl
+2026-03-10 17:07:06 - ml_platform_api - INFO - 数据集上传成功：ID=aa8438e4-8ae7-4115-a16e-38429af11abe，文件名=iris.csv（存储为53b060eb-f92d-42a2-840c-db1bde49794d.csv）
+2026-03-10 17:07:10 - ml_platform_api - WARNING - 列species无异常值范围信息，跳过处理
+2026-03-10 17:07:11 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\aa8438e4-8ae7-4115-a16e-38429af11abe_processed_20260310_170711.csv
+2026-03-10 17:07:11 - ml_platform_api - INFO - 数据集aa8438e4-8ae7-4115-a16e-38429af11abe统一处理完成：处理列=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-10 17:07:16 - ml_platform_api - INFO - 通过processed_ID aa8438e4-8ae7-4115-a16e-38429af11abe_processed_20260310_170711 匹配到文件：./uploads\processed\aa8438e4-8ae7-4115-a16e-38429af11abe_processed_20260310_170711.csv
+2026-03-10 17:07:16 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-10 17:07:16 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-10 17:07:16 - ml_platform_api - INFO - 数值特征列：['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+2026-03-10 17:07:16 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-10 17:07:16 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-10 17:07:16 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-10 17:07:16 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-10 17:07:16 - ml_platform_api - INFO - 特征列编码映射关系：{'sepal_length': '数值列（无编码，标准化）', 'sepal_width': '数值列（无编码，标准化）', 'petal_length': '数值列（无编码，标准化）', 'petal_width': '数值列（无编码，标准化）'}
+2026-03-10 17:07:16 - ml_platform_api - INFO - 编码后的特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:07:16 - ml_platform_api - INFO - 编码后的特征矩阵形状：(150, 4)
+2026-03-10 17:07:16 - ml_platform_api - INFO - 标签列名：species
+2026-03-10 17:07:16 - ml_platform_api - INFO - 标签列原始类型：object
+2026-03-10 17:07:16 - ml_platform_api - INFO - 标签列前5个值：['setosa', 'setosa', 'setosa', 'setosa', 'setosa']
+2026-03-10 17:07:16 - ml_platform_api - INFO - 标签映射关系：{'setosa': 0, 'versicolor': 1, 'virginica': 2}
+2026-03-10 17:07:16 - ml_platform_api - INFO - 标签编码完成，共 3 个类别
+2026-03-10 17:07:16 - ml_platform_api - INFO - 数据集类别数：3，类别列表：['setosa', 'versicolor', 'virginica']
+2026-03-10 17:07:16 - ml_platform_api - INFO - 编码后训练集特征维度：(89, 4)
+2026-03-10 17:07:16 - ml_platform_api - INFO - 编码后验证集特征维度：(30, 4)
+2026-03-10 17:07:16 - ml_platform_api - INFO - 编码后测试集特征维度：(30, 4)
+2026-03-10 17:07:16 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：aa8438e4-8ae7-4115-a16e-38429af11abe | 标签列：species | 总样本：150 | 训练集：89(59.7%) | 验证集：30(20.1%) | 测试集：30(20.1%) | 预处理数据保存路径：./uploads\split_datasets\aa8438e4-8ae7-4115-a16e-38429af11abe_split_20260310_170716
+2026-03-10 17:07:26 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\aa8438e4-8ae7-4115-a16e-38429af11abe_split_20260310_170716\processed_data.npz
+2026-03-10 17:07:26 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-10 17:07:26 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': 3, 'min_samples_split': 2, 'random_state': 42}
+2026-03-10 17:07:26 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：aa8438e4-8ae7-4115-a16e-38429af11abe | 划分ID：aa8438e4-8ae7-4115-a16e-38429af11abe_split_20260310_170716
+2026-03-10 17:07:26 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:07:26 - ml_platform_api - INFO - random_forest模型在测试集上的得分：0.9333333333333333
+2026-03-10 17:07:28 - ml_platform_api - INFO - 特征重要性排序：
+                   特征    重要性
+numeric__petal_length 0.4816
+ numeric__petal_width 0.3797
+numeric__sepal_length 0.1251
+ numeric__sepal_width 0.0135
+2026-03-10 17:07:28 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9,
+      "precision": 0.9024,
+      "recall": 0.9,
+      "f1": 0.8997,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    2,    8 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9333,
+      "precision": 0.9333,
+      "recall": 0.9333,
+      "f1": 0.9333,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    1,    9 ]
+    ]
+}
+}
+2026-03-10 17:07:28 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\aa8438e4-8ae7-4115-a16e-38429af11abe_split_20260310_170716\random_forest_model_20260310_170728.pkl
+2026-03-10 17:08:50 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\aa8438e4-8ae7-4115-a16e-38429af11abe_split_20260310_170716\processed_data.npz
+2026-03-10 17:08:50 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-10 17:08:50 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': 3, 'min_samples_split': 2, 'random_state': 42}
+2026-03-10 17:08:50 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：aa8438e4-8ae7-4115-a16e-38429af11abe | 划分ID：aa8438e4-8ae7-4115-a16e-38429af11abe_split_20260310_170716
+2026-03-10 17:08:50 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:08:50 - ml_platform_api - INFO - random_forest模型在测试集上的得分：0.9333333333333333
+2026-03-10 17:08:50 - ml_platform_api - INFO - 特征重要性排序：
+                   特征    重要性
+numeric__petal_length 0.4816
+ numeric__petal_width 0.3797
+numeric__sepal_length 0.1251
+ numeric__sepal_width 0.0135
+2026-03-10 17:08:50 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9,
+      "precision": 0.9024,
+      "recall": 0.9,
+      "f1": 0.8997,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    2,    8 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9333,
+      "precision": 0.9333,
+      "recall": 0.9333,
+      "f1": 0.9333,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    1,    9 ]
+    ]
+}
+}
+2026-03-10 17:08:50 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\aa8438e4-8ae7-4115-a16e-38429af11abe_split_20260310_170716\random_forest_model_20260310_170850.pkl
+2026-03-10 17:11:12 - ml_platform_api - INFO - 数据集上传成功：ID=7d020dca-50f2-4024-a57f-99ea1fbb5241，文件名=iris.csv（存储为ed5c85e6-54c4-4309-8897-bbac115cb5d4.csv）
+2026-03-10 17:11:16 - ml_platform_api - WARNING - 列species无异常值范围信息，跳过处理
+2026-03-10 17:11:16 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\7d020dca-50f2-4024-a57f-99ea1fbb5241_processed_20260310_171116.csv
+2026-03-10 17:11:16 - ml_platform_api - INFO - 数据集7d020dca-50f2-4024-a57f-99ea1fbb5241统一处理完成：处理列=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-10 17:11:21 - ml_platform_api - INFO - 通过processed_ID 7d020dca-50f2-4024-a57f-99ea1fbb5241_processed_20260310_171116 匹配到文件：./uploads\processed\7d020dca-50f2-4024-a57f-99ea1fbb5241_processed_20260310_171116.csv
+2026-03-10 17:11:21 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-10 17:11:21 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-10 17:11:21 - ml_platform_api - INFO - 数值特征列：['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+2026-03-10 17:11:21 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-10 17:11:21 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-10 17:11:21 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-10 17:11:21 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-10 17:11:21 - ml_platform_api - INFO - 特征列编码映射关系：{'sepal_length': '数值列（无编码，标准化）', 'sepal_width': '数值列（无编码，标准化）', 'petal_length': '数值列（无编码，标准化）', 'petal_width': '数值列（无编码，标准化）'}
+2026-03-10 17:11:21 - ml_platform_api - INFO - 编码后的特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:11:21 - ml_platform_api - INFO - 编码后的特征矩阵形状：(150, 4)
+2026-03-10 17:11:21 - ml_platform_api - INFO - 标签列名：species
+2026-03-10 17:11:21 - ml_platform_api - INFO - 标签列原始类型：object
+2026-03-10 17:11:21 - ml_platform_api - INFO - 标签列前5个值：['setosa', 'setosa', 'setosa', 'setosa', 'setosa']
+2026-03-10 17:11:21 - ml_platform_api - INFO - 标签映射关系：{'setosa': 0, 'versicolor': 1, 'virginica': 2}
+2026-03-10 17:11:21 - ml_platform_api - INFO - 标签编码完成，共 3 个类别
+2026-03-10 17:11:21 - ml_platform_api - INFO - 数据集类别数：3，类别列表：['setosa', 'versicolor', 'virginica']
+2026-03-10 17:11:21 - ml_platform_api - INFO - 编码后训练集特征维度：(89, 4)
+2026-03-10 17:11:21 - ml_platform_api - INFO - 编码后验证集特征维度：(30, 4)
+2026-03-10 17:11:21 - ml_platform_api - INFO - 编码后测试集特征维度：(30, 4)
+2026-03-10 17:11:21 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：7d020dca-50f2-4024-a57f-99ea1fbb5241 | 标签列：species | 总样本：150 | 训练集：89(59.7%) | 验证集：30(20.1%) | 测试集：30(20.1%) | 预处理数据保存路径：./uploads\split_datasets\7d020dca-50f2-4024-a57f-99ea1fbb5241_split_20260310_171121
+2026-03-10 17:32:11 - ml_platform_api - INFO - 数据集上传成功：ID=93444792-34a6-431b-b516-3922a75df6d5，文件名=iris.csv（存储为515dc15f-b52a-4cb4-b1ce-2d6fb49133f9.csv）
+2026-03-10 17:32:14 - ml_platform_api - WARNING - 列species无异常值范围信息，跳过处理
+2026-03-10 17:32:14 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\93444792-34a6-431b-b516-3922a75df6d5_processed_20260310_173214.csv
+2026-03-10 17:32:14 - ml_platform_api - INFO - 数据集93444792-34a6-431b-b516-3922a75df6d5统一处理完成：处理列=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-10 17:32:19 - ml_platform_api - INFO - 通过processed_ID 93444792-34a6-431b-b516-3922a75df6d5_processed_20260310_173214 匹配到文件：./uploads\processed\93444792-34a6-431b-b516-3922a75df6d5_processed_20260310_173214.csv
+2026-03-10 17:32:19 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-10 17:32:19 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-10 17:32:19 - ml_platform_api - INFO - 数值特征列：['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+2026-03-10 17:32:19 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-10 17:32:19 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-10 17:32:19 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-10 17:32:19 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-10 17:32:19 - ml_platform_api - INFO - 特征列编码映射关系：{'sepal_length': '数值列（无编码，标准化）', 'sepal_width': '数值列（无编码，标准化）', 'petal_length': '数值列（无编码，标准化）', 'petal_width': '数值列（无编码，标准化）'}
+2026-03-10 17:32:19 - ml_platform_api - INFO - 编码后的特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:32:19 - ml_platform_api - INFO - 编码后的特征矩阵形状：(150, 4)
+2026-03-10 17:32:19 - ml_platform_api - INFO - 标签列名：species
+2026-03-10 17:32:19 - ml_platform_api - INFO - 标签列原始类型：object
+2026-03-10 17:32:19 - ml_platform_api - INFO - 标签列前5个值：['setosa', 'setosa', 'setosa', 'setosa', 'setosa']
+2026-03-10 17:32:19 - ml_platform_api - INFO - 标签映射关系：{'setosa': 0, 'versicolor': 1, 'virginica': 2}
+2026-03-10 17:32:19 - ml_platform_api - INFO - 标签编码完成，共 3 个类别
+2026-03-10 17:32:19 - ml_platform_api - INFO - 数据集类别数：3，类别列表：['setosa', 'versicolor', 'virginica']
+2026-03-10 17:32:19 - ml_platform_api - INFO - 编码后训练集特征维度：(89, 4)
+2026-03-10 17:32:19 - ml_platform_api - INFO - 编码后验证集特征维度：(30, 4)
+2026-03-10 17:32:19 - ml_platform_api - INFO - 编码后测试集特征维度：(30, 4)
+2026-03-10 17:32:19 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：93444792-34a6-431b-b516-3922a75df6d5 | 标签列：species | 总样本：150 | 训练集：89(59.7%) | 验证集：30(20.1%) | 测试集：30(20.1%) | 预处理数据保存路径：./uploads\split_datasets\93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219
+2026-03-10 17:32:22 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219\processed_data.npz
+2026-03-10 17:32:22 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-10 17:32:22 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': 3, 'min_samples_split': 2, 'random_state': 42}
+2026-03-10 17:32:22 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：93444792-34a6-431b-b516-3922a75df6d5 | 划分ID：93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219
+2026-03-10 17:32:22 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:32:22 - ml_platform_api - INFO - random_forest模型在测试集上的得分：0.9333333333333333
+2026-03-10 17:32:24 - ml_platform_api - INFO - 特征重要性排序：
+                   特征    重要性
+numeric__petal_length 0.4816
+ numeric__petal_width 0.3797
+numeric__sepal_length 0.1251
+ numeric__sepal_width 0.0135
+2026-03-10 17:32:24 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9,
+      "precision": 0.9024,
+      "recall": 0.9,
+      "f1": 0.8997,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    2,    8 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9333,
+      "precision": 0.9333,
+      "recall": 0.9333,
+      "f1": 0.9333,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    1,    9 ]
+    ]
+}
+}
+2026-03-10 17:32:24 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219\random_forest_model_20260310_173224.pkl
+2026-03-10 17:34:35 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219\processed_data.npz
+2026-03-10 17:34:35 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-10 17:34:35 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'objective': 'multiclass', 'learning_rate': 0.1, 'random_state': 42}
+2026-03-10 17:34:35 - ml_platform_api - INFO - 开始训练lightgbm模型 | 数据集ID：93444792-34a6-431b-b516-3922a75df6d5 | 划分ID：93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219
+2026-03-10 17:34:41 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:34:42 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.8667,
+      "precision": 0.8667,
+      "recall": 0.8667,
+      "f1": 0.8667,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    8,    2 ],
+      [    0,    2,    8 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.8333,
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8293,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    2,    7,    1 ],
+      [    0,    2,    8 ]
+    ]
+}
+}
+2026-03-10 17:34:42 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219\lightgbm_model_20260310_173442.pkl
+2026-03-10 17:49:21 - ml_platform_api - INFO - 数据集上传成功：ID=70b66a3c-93f4-47ec-a73f-82dd2fb75610，文件名=iris.csv（存储为383b827d-57ad-45f7-8b75-f1237e6e6b77.csv）
+2026-03-10 17:49:25 - ml_platform_api - WARNING - 列species无异常值范围信息，跳过处理
+2026-03-10 17:49:25 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\70b66a3c-93f4-47ec-a73f-82dd2fb75610_processed_20260310_174925.csv
+2026-03-10 17:49:25 - ml_platform_api - INFO - 数据集70b66a3c-93f4-47ec-a73f-82dd2fb75610统一处理完成：处理列=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-10 17:49:30 - ml_platform_api - INFO - 通过processed_ID 70b66a3c-93f4-47ec-a73f-82dd2fb75610_processed_20260310_174925 匹配到文件：./uploads\processed\70b66a3c-93f4-47ec-a73f-82dd2fb75610_processed_20260310_174925.csv
+2026-03-10 17:49:30 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-10 17:49:30 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-10 17:49:30 - ml_platform_api - INFO - 数值特征列：['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+2026-03-10 17:49:30 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-10 17:49:30 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-10 17:49:30 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-10 17:49:30 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-10 17:49:30 - ml_platform_api - INFO - 特征列编码映射关系：{'sepal_length': '数值列（无编码，标准化）', 'sepal_width': '数值列（无编码，标准化）', 'petal_length': '数值列（无编码，标准化）', 'petal_width': '数值列（无编码，标准化）'}
+2026-03-10 17:49:30 - ml_platform_api - INFO - 编码后的特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:49:30 - ml_platform_api - INFO - 编码后的特征矩阵形状：(150, 4)
+2026-03-10 17:49:30 - ml_platform_api - INFO - 标签列名：species
+2026-03-10 17:49:30 - ml_platform_api - INFO - 标签列原始类型：object
+2026-03-10 17:49:30 - ml_platform_api - INFO - 标签列前5个值：['setosa', 'setosa', 'setosa', 'setosa', 'setosa']
+2026-03-10 17:49:30 - ml_platform_api - INFO - 标签映射关系：{'setosa': 0, 'versicolor': 1, 'virginica': 2}
+2026-03-10 17:49:30 - ml_platform_api - INFO - 标签编码完成，共 3 个类别
+2026-03-10 17:49:30 - ml_platform_api - INFO - 数据集类别数：3，类别列表：['setosa', 'versicolor', 'virginica']
+2026-03-10 17:49:30 - ml_platform_api - INFO - 编码后训练集特征维度：(89, 4)
+2026-03-10 17:49:30 - ml_platform_api - INFO - 编码后验证集特征维度：(30, 4)
+2026-03-10 17:49:30 - ml_platform_api - INFO - 编码后测试集特征维度：(30, 4)
+2026-03-10 17:49:30 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：70b66a3c-93f4-47ec-a73f-82dd2fb75610 | 标签列：species | 总样本：150 | 训练集：89(59.7%) | 验证集：30(20.1%) | 测试集：30(20.1%) | 预处理数据保存路径：./uploads\split_datasets\70b66a3c-93f4-47ec-a73f-82dd2fb75610_split_20260310_174930
+2026-03-10 17:49:34 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\70b66a3c-93f4-47ec-a73f-82dd2fb75610_split_20260310_174930\processed_data.npz
+2026-03-10 17:49:34 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-10 17:49:34 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': 3, 'min_samples_split': 2, 'random_state': 42}
+2026-03-10 17:49:34 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：70b66a3c-93f4-47ec-a73f-82dd2fb75610 | 划分ID：70b66a3c-93f4-47ec-a73f-82dd2fb75610_split_20260310_174930
+2026-03-10 17:49:34 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-10 17:49:34 - ml_platform_api - INFO - random_forest模型在测试集上的得分：0.9333333333333333
+2026-03-10 17:49:34 - ml_platform_api - INFO - 特征重要性排序：
+                   特征    重要性
+numeric__petal_length 0.4816
+ numeric__petal_width 0.3797
+numeric__sepal_length 0.1251
+ numeric__sepal_width 0.0135
+2026-03-10 17:49:34 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9,
+      "precision": 0.9024,
+      "recall": 0.9,
+      "f1": 0.8997,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    2,    8 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9333,
+      "precision": 0.9333,
+      "recall": 0.9333,
+      "f1": 0.9333,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    1,    9 ]
+    ]
+}
+}
+2026-03-10 17:49:34 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\70b66a3c-93f4-47ec-a73f-82dd2fb75610_split_20260310_174930\random_forest_model_20260310_174934.pkl

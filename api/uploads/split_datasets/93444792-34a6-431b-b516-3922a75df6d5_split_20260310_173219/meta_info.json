@@ -1,0 +1,53 @@
+{
+    "split_id": "93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219",
+    "dataset_id": "93444792-34a6-431b-b516-3922a75df6d5",
+    "label_column": "species",
+    "label_mapping": {
+        "setosa": 0,
+        "versicolor": 1,
+        "virginica": 2
+    },
+    "feature_encoding_mapping": {
+        "sepal_length": "数值列（无编码，标准化）",
+        "sepal_width": "数值列（无编码，标准化）",
+        "petal_length": "数值列（无编码，标准化）",
+        "petal_width": "数值列（无编码，标准化）"
+    },
+    "feature_encoding": [
+        "numeric__sepal_length",
+        "numeric__sepal_width",
+        "numeric__petal_length",
+        "numeric__petal_width"
+    ],
+    "all_feature_cols": [
+        "sepal_length",
+        "sepal_width",
+        "petal_length",
+        "petal_width"
+    ],
+    "numeric_cols": [
+        "sepal_length",
+        "sepal_width",
+        "petal_length",
+        "petal_width"
+    ],
+    "onehot_cols": [],
+    "ordinal_cols": [],
+    "split_time": "2026-03-10 17:32:19",
+    "data_shape": {
+        "train": [
+            89,
+            4
+        ],
+        "val": [
+            30,
+            4
+        ],
+        "test": [
+            30,
+            4
+        ]
+    },
+    "preprocessor_path": "./uploads\\split_datasets\\93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219\\preprocessor.pkl",
+    "label_encoder_path": "./uploads\\split_datasets\\93444792-34a6-431b-b516-3922a75df6d5_split_20260310_173219\\label_encoder.pkl"
+}

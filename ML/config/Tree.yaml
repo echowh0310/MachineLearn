@@ -1,0 +1,21 @@
+# 数据路径
+IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/irisdata/iris.csv"
+# 数据集划分参数
+TEST_SIZE:  0.15
+VAL_SIZE: 0.15
+RANDOM_SEED:  42
+USE_STRATIFIED: True  # 分层采样保证类别分布
+
+# 特征/标签列名
+IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width']
+#IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+IRIS_LABEL_COL: "species"
+
+#模型参数
+CRITERIA: 'gini' #基尼系数
+MAX_DEPTH: 3 #树深度
+SPLITTER: "BEST"#"random“用于在每个节点上选择折分的策略
+MIN_SAMPLES_SPLIT: 2 #拆分内部节点所需的最少样本数
+MIN_SAMPLES_LEAF: 1 #在叶节点处所需的最小样本数
+
+

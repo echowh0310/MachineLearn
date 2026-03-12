@@ -1,0 +1,10 @@
+# 数据路径
+IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/irisdata/iris.csv"
+# 数据集划分参数
+TEST_SIZE:  0.15
+VAL_SIZE: 0.15
+RANDOM_SEED:  42
+use_stratified: False
+# 特征/标签列名
+IRIS_FEATURE_COL: "petal_length"
+IRIS_LABEL_COL: "petal_width"

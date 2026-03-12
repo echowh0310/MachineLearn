@@ -1,0 +1,45 @@
+# 数据路径
+IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/irisdata/iris.csv"
+# 数据集划分参数
+TEST_SIZE:  0.15
+VAL_SIZE: 0.15
+RANDOM_SEED:  42
+USE_STRATIFIED: True  # 分层采样保证类别分布
+
+# 特征/标签列名
+#IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width']
+IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+IRIS_LABEL_COL: "species"
+
+#模型参数
+MODEL: "GaussianNB"
+#高斯贝叶斯分类器（GaussianNB）、多项式贝叶斯分类器（MultinomialNB）、伯努利贝叶斯分类器（BernoulliNB）
+
+#GaussianNB没有参数
+#MultinomialNB, 参数alpha、fit_prior、class_prior
+#BernoulliNB, 参数alpha、fit_prior、class_prior、binarize
+
+ALPHA: 1   #指定alphaα值。
+FIT_PRIOR: True  # 布尔值，如果为True，则不去学习P(y=ck)，代替均匀分布，如果为False，则去学习P(y=ck)
+CLASS_PRIOR: null #一个数组。它指定每个分类的先验概率.如果指定了该参数，则每个分类的先验概率不再从数据集中学得。
+BINARIZE: null #一个浮点数或者None,如果为None 那么会假定原始数据已经二元化了。如果是浮点数，那么会以该数值为界，特征取值大于它的作为1，否则作为0，采取这种策略来二元化。
+#高斯贝叶斯：适配连续数值特征（正态分布假设）；
+#多项式贝叶斯：适配离散计数特征（词频 / 频次）；
+#伯努利贝叶斯：适配二值离散特征（有无 / 0-1）；
+# "Ga_naive_bayes": {
+#        "priors": None,          # 类别先验概率（None则从训练数据中计算）
+#        "var_smoothing": 1e-09   # 方差平滑（避免方差为0导致的计算错误，sklearn默认值）
+#    },
+#    # 多项式贝叶斯（适配词频/计数特征，若后续扩展文本分类）
+#    "Mu_naive_bayes": {
+#        "alpha": 1.0,            # 拉普拉斯平滑系数（解决零概率问题，默认1.0）
+#        "fit_prior": True,       # 是否学习类别先验概率（True=从数据学，False=均匀先验）
+#        "class_prior": None      # 手动指定类别先验概率（None则自动计算）
+#    },
+#    # 伯努利贝叶斯（适配二值/0-1特征，如onehot编码后的特征）
+#    "Be_naive_bayes": {
+#        "alpha": 1.0,            # 平滑系数（同多项式贝叶斯）
+#        "binarize": 0.0,         # 二值化阈值（数值特征>0→1，≤0→0；None则要求输入已二值化）
+#        "fit_prior": True,       # 是否学习类别先验概率
+#        "class_prior": None      # 手动指定类别先验概率
+#    }

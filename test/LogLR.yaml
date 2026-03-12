@@ -1,0 +1,36 @@
+# 数据路径
+IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/irisdata/iris.csv"
+# 数据集划分参数
+TEST_SIZE:  0.15
+VAL_SIZE: 0.15
+RANDOM_SEED:  42
+use_stratified: True  # 二分类必须分层采样，保证类别分布
+# 特征/标签列名
+IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width']
+#IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+IRIS_LABEL_COL: "species"
+#模型参数
+ENALTY: "l2"
+#penalty='l2'（默认）：L2 正则化（岭回归），惩罚系数的平方和，让系数尽可能小但不为 0，是最通用的选择。
+#penalty='l1'：L1 正则化（Lasso 回归），惩罚系数的绝对值和，会让部分系数变为 0（特征选择效果），适合特征数量多的场景。
+#penalty='elasticnet'：L1+L2 混合正则化，需配合 l1_ratio 参数使用。
+#penalty=None：无正则化，容易过拟合，仅适用于数据量极大且特征少的场景。
+C: 1 #正则化强度的倒数
+#C 越大 → 正则化越弱 → 模型越贴合训练数据（容易过拟合）
+#C 越小 → 正则化越强 → 模型越简单（容易欠拟合）
+CLASS_WEIGHT: None #设置类别权重，解决样本不平衡问题
+#class_weight=None（默认）：所有类别权重相等；
+#class_weight='balanced'：自动根据样本数量调整权重（样本少的类别权重高），是处理不平衡数据的首选；
+#class_weight={0:0.1, 1:0.9}：手动指定权重（比如 0 类权重 0.1，1 类权重 0.9）。
+SOLVER: 'lbfgs' #指定求解逻辑回归损失函数的优化算法，默认为liblinear。
+#‘newton-cg’，‘lbfgs’，‘liblinear’，‘sag’，'saga'，default：liblinear
+#对于小型数据集，可以选择‘liblinear’，而’sag’和’saga’对于大型数据集更快。
+#对于多类问题，只有’newton-cg’，‘sag’，'saga’和’lbfgs’处理多项损失；
+
+MAX_ITER: 100 #优化算法的最大迭代次数，若迭代次数不够，模型可能无法收敛。
+
+MULTI_CLASS: multinomial #指定多分类问题的处理方式
+#multi_class='auto'（默认）：自动选择（二分类用 'ovr'，多分类且 solver 支持则用 'multinomial'）；
+#multi_class='ovr'：一对多（将多分类拆成多个二分类），兼容所有 solver；
+#multi_class='multinomial'：多分类逻辑回归，仅支持 'lbfgs'/'sag'/'saga'/'newton-cg'。
+

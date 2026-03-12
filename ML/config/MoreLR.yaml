@@ -1,0 +1,10 @@
+# 数据路径
+BOSTON_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/fangjia/boston_house_prices.csv"
+# 数据集划分参数
+TEST_SIZE:  0.2
+VAL_SIZE: 0.2
+RANDOM_SEED:  42
+use_stratified: False
+# 特征/标签列名
+BOSTON_FEATURE_COLS: ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+BOSTON_LABEL_COL: "MEDV"

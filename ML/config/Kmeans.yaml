@@ -1,0 +1,17 @@
+# 数据路径
+IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/irisdata/iris.csv"
+#IRIS_DATA_PATH: "D:/wh/AAAproject/Algorithm/Data/Breast/BreastTissue.csv"
+# 特征/标签列名
+#IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width']
+IRIS_FEATURE_COLS: ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+#IRIS_FEATURE_COLS: [ 'I0', 'PA500', 'HFS', 'DA', 'Area', 'A/DA', 'Max IP', 'DR', 'P']
+#IRIS_FEATURE_COLS: ['total_loan', 'interest','monthly_payment',
+#                    "post_code","debt_loan_ratio",
+#                    "scoring_low","scoring_high"]
+FINAL_K: 5  #簇数量默认值
+
+INIT: 'k-means++' #参数指定初始化质心的方法
+N_INIT: 10  #表示使用不同的初始质心运行算法的次数。默认10
+RANDOM_STATE: 42
+
+

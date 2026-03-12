@@ -1,0 +1,1370 @@
+2026-03-11 08:55:14 - ml_platform_api - INFO - 数据集上传成功：ID=1966fbd9-2f00-4836-97b2-3a85c38eb412，文件名=iris.csv（存储为bbdedf73-9f64-484d-b7fb-601dcd06e704.csv）
+2026-03-11 08:55:18 - ml_platform_api - WARNING - 列species无异常值范围信息，跳过处理
+2026-03-11 08:55:18 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\1966fbd9-2f00-4836-97b2-3a85c38eb412_processed_20260311_085518.csv
+2026-03-11 08:55:18 - ml_platform_api - INFO - 数据集1966fbd9-2f00-4836-97b2-3a85c38eb412统一处理完成：处理列=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-11 08:55:25 - ml_platform_api - INFO - 通过processed_ID 1966fbd9-2f00-4836-97b2-3a85c38eb412_processed_20260311_085518 匹配到文件：./uploads\processed\1966fbd9-2f00-4836-97b2-3a85c38eb412_processed_20260311_085518.csv
+2026-03-11 08:55:25 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-11 08:55:25 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-11 08:55:25 - ml_platform_api - INFO - 数值特征列：['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+2026-03-11 08:55:25 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-11 08:55:25 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-11 08:55:25 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-11 08:55:25 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-11 08:55:25 - ml_platform_api - INFO - 特征列编码映射关系：{'sepal_length': '数值列（无编码，标准化）', 'sepal_width': '数值列（无编码，标准化）', 'petal_length': '数值列（无编码，标准化）', 'petal_width': '数值列（无编码，标准化）'}
+2026-03-11 08:55:25 - ml_platform_api - INFO - 编码后的特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:55:25 - ml_platform_api - INFO - 编码后的特征矩阵形状：(150, 4)
+2026-03-11 08:55:25 - ml_platform_api - INFO - 标签列名：species
+2026-03-11 08:55:25 - ml_platform_api - INFO - 标签列原始类型：object
+2026-03-11 08:55:25 - ml_platform_api - INFO - 标签列前5个值：['setosa', 'setosa', 'setosa', 'setosa', 'setosa']
+2026-03-11 08:55:25 - ml_platform_api - INFO - 标签映射关系：{'setosa': 0, 'versicolor': 1, 'virginica': 2}
+2026-03-11 08:55:25 - ml_platform_api - INFO - 标签编码完成，共 3 个类别
+2026-03-11 08:55:25 - ml_platform_api - INFO - 数据集类别数：3，类别列表：['setosa', 'versicolor', 'virginica']
+2026-03-11 08:55:25 - ml_platform_api - INFO - 编码后训练集特征维度：(89, 4)
+2026-03-11 08:55:25 - ml_platform_api - INFO - 编码后验证集特征维度：(30, 4)
+2026-03-11 08:55:25 - ml_platform_api - INFO - 编码后测试集特征维度：(30, 4)
+2026-03-11 08:55:25 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 标签列：species | 总样本：150 | 训练集：89(59.7%) | 验证集：30(20.1%) | 测试集：30(20.1%) | 预处理数据保存路径：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:55:29 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:55:29 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:55:29 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': 3, 'min_samples_split': 2, 'random_state': 42}
+2026-03-11 08:55:29 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:55:29 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:55:29 - ml_platform_api - INFO - random_forest模型在测试集上的得分：0.9333333333333333
+2026-03-11 08:55:34 - ml_platform_api - INFO - 特征重要性排序：
+                   特征    重要性
+numeric__petal_length 0.4816
+ numeric__petal_width 0.3797
+numeric__sepal_length 0.1251
+ numeric__sepal_width 0.0135
+2026-03-11 08:55:34 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9,
+      "precision": 0.9024,
+      "recall": 0.9,
+      "f1": 0.8997,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    2,    8 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9333,
+      "precision": 0.9333,
+      "recall": 0.9333,
+      "f1": 0.9333,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    1,    9 ]
+    ]
+}
+}
+2026-03-11 08:55:34 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\random_forest_model_20260311_085534.pkl
+2026-03-11 08:55:36 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:55:36 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:55:36 - ml_platform_api - INFO - 使用模型参数：{'max_iter': 1000, 'penalty': 'l2', 'C': 1.0, 'random_state': 42}
+2026-03-11 08:55:36 - ml_platform_api - INFO - 开始训练logistic_regression模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:55:36 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:55:37 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 0.9663,
+      "precision": 0.9666,
+      "recall": 0.9663,
+      "f1": 0.9663,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   29,    1 ],
+      [    0,    2,   27 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9667,
+      "precision": 0.9697,
+      "recall": 0.9667,
+      "f1": 0.9666,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,   10,    0 ],
+      [    0,    1,    9 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9333,
+      "precision": 0.9333,
+      "recall": 0.9333,
+      "f1": 0.9333,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    1,    9 ]
+    ]
+}
+}
+2026-03-11 08:55:37 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\logistic_regression_model_20260311_085537.pkl
+2026-03-11 08:55:40 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:55:40 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:55:40 - ml_platform_api - INFO - 使用模型参数：{'n_neighbors': 5, 'weights': 'uniform', 'p': 2, 'metric': 'minkowski'}
+2026-03-11 08:55:40 - ml_platform_api - INFO - 开始训练knn模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:55:40 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:55:41 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 0.9663,
+      "precision": 0.9694,
+      "recall": 0.9663,
+      "f1": 0.9662,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    3,   26 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9333,
+      "precision": 0.9444,
+      "recall": 0.9333,
+      "f1": 0.9327,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,   10,    0 ],
+      [    0,    2,    8 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9667,
+      "precision": 0.9697,
+      "recall": 0.9667,
+      "f1": 0.9666,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,   10,    0 ],
+      [    0,    1,    9 ]
+    ]
+}
+}
+2026-03-11 08:55:41 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\knn_model_20260311_085541.pkl
+2026-03-11 08:55:44 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:55:44 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:55:44 - ml_platform_api - INFO - 使用模型参数：{'max_depth': 3, 'criterion': 'gini', 'min_samples_split': 2, 'splitter': 'best', 'random_state': 42}
+2026-03-11 08:55:44 - ml_platform_api - INFO - 开始训练decision_tree模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:55:44 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:55:44 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.8667,
+      "precision": 0.875,
+      "recall": 0.8667,
+      "f1": 0.8653,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    3,    7 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.8667,
+      "precision": 0.8667,
+      "recall": 0.8667,
+      "f1": 0.8667,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    8,    2 ],
+      [    0,    2,    8 ]
+    ]
+}
+}
+2026-03-11 08:55:44 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\decision_tree_model_20260311_085544.pkl
+2026-03-11 08:55:48 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:55:48 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:55:48 - ml_platform_api - INFO - 使用模型参数：{}
+2026-03-11 08:55:48 - ml_platform_api - INFO - 开始训练Ga_naive_bayes模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:55:48 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:55:48 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 0.9663,
+      "precision": 0.9666,
+      "recall": 0.9663,
+      "f1": 0.9663,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   29,    1 ],
+      [    0,    2,   27 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9667,
+      "precision": 0.9697,
+      "recall": 0.9667,
+      "f1": 0.9666,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,   10,    0 ],
+      [    0,    1,    9 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9667,
+      "precision": 0.9697,
+      "recall": 0.9667,
+      "f1": 0.9666,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    0,   10 ]
+    ]
+}
+}
+2026-03-11 08:55:48 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\Ga_naive_bayes_model_20260311_085548.pkl
+2026-03-11 08:55:51 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:55:51 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:55:51 - ml_platform_api - INFO - 使用模型参数：{}
+2026-03-11 08:55:51 - ml_platform_api - INFO - 开始训练Be_naive_bayes模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:55:51 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:55:52 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 0.7865,
+      "precision": 0.8229,
+      "recall": 0.7865,
+      "f1": 0.7707,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    1,   13,   16 ],
+      [    0,    2,   27 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.6333,
+      "precision": 0.5842,
+      "recall": 0.6333,
+      "f1": 0.5909,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    3,    2,    5 ],
+      [    0,    3,    7 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.8,
+      "precision": 0.8492,
+      "recall": 0.8,
+      "f1": 0.7713,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    2,    4,    4 ],
+      [    0,    0,   10 ]
+    ]
+}
+}
+2026-03-11 08:55:52 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\Be_naive_bayes_model_20260311_085552.pkl
+2026-03-11 08:55:55 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:55:55 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:55:55 - ml_platform_api - INFO - 使用模型参数：{'kernel': 'rbf', 'gamma': 'scale', 'random_state': 42, 'probability': False}
+2026-03-11 08:55:55 - ml_platform_api - INFO - 开始训练svm模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:55:55 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:55:55 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 0.9775,
+      "precision": 0.9789,
+      "recall": 0.9775,
+      "f1": 0.9775,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    2,   27 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9667,
+      "precision": 0.9697,
+      "recall": 0.9667,
+      "f1": 0.9666,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,   10,    0 ],
+      [    0,    1,    9 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9333,
+      "precision": 0.9333,
+      "recall": 0.9333,
+      "f1": 0.9333,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    1,    9 ]
+    ]
+}
+}
+2026-03-11 08:55:55 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\svm_model_20260311_085555.pkl
+2026-03-11 08:55:58 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:55:58 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:55:58 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': 3, 'loss': 'log_loss', 'learning_rate': 0.1, 'random_state': 42}
+2026-03-11 08:55:58 - ml_platform_api - INFO - 开始训练gboost模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:55:59 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:55:59 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.8667,
+      "precision": 0.875,
+      "recall": 0.8667,
+      "f1": 0.8653,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    3,    7 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.8667,
+      "precision": 0.866,
+      "recall": 0.8667,
+      "f1": 0.8648,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    1,    8,    1 ],
+      [    0,    2,    8 ]
+    ]
+}
+}
+2026-03-11 08:55:59 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\gboost_model_20260311_085559.pkl
+2026-03-11 08:56:02 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:56:02 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:56:02 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'objective': 'multiclass', 'learning_rate': 0.1, 'random_state': 42}
+2026-03-11 08:56:02 - ml_platform_api - INFO - 开始训练lightgbm模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:56:06 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:56:07 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.8667,
+      "precision": 0.8667,
+      "recall": 0.8667,
+      "f1": 0.8667,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    8,    2 ],
+      [    0,    2,    8 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.8333,
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8293,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    2,    7,    1 ],
+      [    0,    2,    8 ]
+    ]
+}
+}
+2026-03-11 08:56:07 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\lightgbm_model_20260311_085607.pkl
+2026-03-11 08:56:12 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:56:12 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:56:12 - ml_platform_api - INFO - 使用模型参数：{'objective': 'multi:softmax', 'n_estimators': 100, 'learning_rate': 0.1, 'random_state': 42}
+2026-03-11 08:56:12 - ml_platform_api - INFO - 开始训练xgboost模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:56:12 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:56:13 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.8667,
+      "precision": 0.875,
+      "recall": 0.8667,
+      "f1": 0.8653,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    3,    7 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9,
+      "precision": 0.9024,
+      "recall": 0.9,
+      "f1": 0.8997,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    2,    8 ]
+    ]
+}
+}
+2026-03-11 08:56:13 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\xgboost_model_20260311_085613.pkl
+2026-03-11 08:56:17 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:56:17 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:56:17 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 50, 'learning_rate': 1.0, 'random_state': 42}
+2026-03-11 08:56:17 - ml_platform_api - INFO - 开始训练adaboost模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:56:17 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:56:18 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.8667,
+      "precision": 0.875,
+      "recall": 0.8667,
+      "f1": 0.8653,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    3,    7 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.8667,
+      "precision": 0.8667,
+      "recall": 0.8667,
+      "f1": 0.8667,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    8,    2 ],
+      [    0,    2,    8 ]
+    ]
+}
+}
+2026-03-11 08:56:18 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\adaboost_model_20260311_085618.pkl
+2026-03-11 08:56:21 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\processed_data.npz
+2026-03-11 08:56:21 - ml_platform_api - INFO - 数据加载成功 | 训练集：(89, 4) | 验证集：(30, 4) | 测试集：(30, 4)
+2026-03-11 08:56:21 - ml_platform_api - INFO - 使用模型参数：{'hidden_layer_sizes': (64, 32), 'activation': 'relu', 'solver': 'adam', 'alpha': 0.0001, 'learning_rate': 'adaptive', 'learning_rate_init': 0.001, 'max_iter': 300, 'early_stopping': False, 'random_state': 42}
+2026-03-11 08:56:21 - ml_platform_api - INFO - 开始训练mlp模型 | 数据集ID：1966fbd9-2f00-4836-97b2-3a85c38eb412 | 划分ID：1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525
+2026-03-11 08:56:21 - ml_platform_api - INFO - 编码后特征列：['numeric__sepal_length', 'numeric__sepal_width', 'numeric__petal_length', 'numeric__petal_width']
+2026-03-11 08:56:21 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion": [
+      [   30,    0,    0 ],
+      [    0,   30,    0 ],
+      [    0,    0,   29 ]
+    ]
+},
+      "val": {
+      "accuracy": 0.9333,
+      "precision": 0.9333,
+      "recall": 0.9333,
+      "f1": 0.9333,
+      "confusion": [
+      [   10,    0,    0 ],
+      [    0,    9,    1 ],
+      [    0,    1,    9 ]
+    ]
+},
+      "test": {
+      "accuracy": 0.9333,
+      "precision": 0.9364,
+      "recall": 0.9333,
+      "f1": 0.9332,
+      "confusion": [
+      [    9,    1,    0 ],
+      [    0,    9,    1 ],
+      [    0,    0,   10 ]
+    ]
+}
+}
+2026-03-11 08:56:21 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\1966fbd9-2f00-4836-97b2-3a85c38eb412_split_20260311_085525\mlp_model_20260311_085621.pkl
+2026-03-11 08:56:35 - ml_platform_api - INFO - 数据集上传成功：ID=820b11fd-4aa4-497b-8d51-54431892c876，文件名=boston_house_prices.csv（存储为ff9bd857-d17e-47a3-91fa-c6228e803e14.csv）
+2026-03-11 08:56:45 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\820b11fd-4aa4-497b-8d51-54431892c876_processed_20260311_085645.csv
+2026-03-11 08:56:45 - ml_platform_api - INFO - 数据集820b11fd-4aa4-497b-8d51-54431892c876统一处理完成：处理列=['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-11 08:56:57 - ml_platform_api - INFO - 通过processed_ID 820b11fd-4aa4-497b-8d51-54431892c876_processed_20260311_085645 匹配到文件：./uploads\processed\820b11fd-4aa4-497b-8d51-54431892c876_processed_20260311_085645.csv
+2026-03-11 08:56:57 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-11 08:56:57 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-11 08:56:57 - ml_platform_api - INFO - 数值特征列：['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+2026-03-11 08:56:57 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-11 08:56:57 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-11 08:56:57 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-11 08:56:57 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-11 08:56:57 - ml_platform_api - INFO - 特征列编码映射关系：{'CRIM': '数值列（无编码，标准化）', 'ZN': '数值列（无编码，标准化）', 'INDUS': '数值列（无编码，标准化）', 'CHAS': '数值列（无编码，标准化）', 'NOX': '数值列（无编码，标准化）', 'RM': '数值列（无编码，标准化）', 'AGE': '数值列（无编码，标准化）', 'DIS': '数值列（无编码，标准化）', 'RAD': '数值列（无编码，标准化）', 'TAX': '数值列（无编码，标准化）', 'PTRATIO': '数值列（无编码，标准化）', 'B': '数值列（无编码，标准化）', 'LSTAT': '数值列（无编码，标准化）'}
+2026-03-11 08:56:57 - ml_platform_api - INFO - 编码后的特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:56:57 - ml_platform_api - INFO - 编码后的特征矩阵形状：(506, 13)
+2026-03-11 08:56:57 - ml_platform_api - INFO - 标签列名：MEDV
+2026-03-11 08:56:57 - ml_platform_api - INFO - 标签列原始类型：float64
+2026-03-11 08:56:57 - ml_platform_api - INFO - 标签列前5个值：[24.0, 21.6, 34.7, 33.4, 36.2]
+2026-03-11 08:56:57 - ml_platform_api - INFO - 标签列为连续数值类型，无需编码（回归任务）
+2026-03-11 08:56:57 - ml_platform_api - INFO - 数据集类别数：-1，类别列表：[]
+2026-03-11 08:56:57 - ml_platform_api - INFO - 编码后训练集特征维度：(303, 13)
+2026-03-11 08:56:57 - ml_platform_api - INFO - 编码后验证集特征维度：(101, 13)
+2026-03-11 08:56:57 - ml_platform_api - INFO - 编码后测试集特征维度：(102, 13)
+2026-03-11 08:56:57 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：820b11fd-4aa4-497b-8d51-54431892c876 | 标签列：MEDV | 总样本：506 | 训练集：303(59.9%) | 验证集：101(20.0%) | 测试集：102(20.2%) | 预处理数据保存路径：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:08 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:08 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:08 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': None, 'random_state': 42}
+2026-03-11 08:57:08 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:09 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:09 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:09 - ml_platform_api - INFO - MAE (平均绝对误差)：0.9235
+2026-03-11 08:57:09 - ml_platform_api - INFO - MSE (均方误差)：2.0559
+2026-03-11 08:57:09 - ml_platform_api - INFO - RMSE (均方根误差)：1.4338
+2026-03-11 08:57:09 - ml_platform_api - INFO - R² (决定系数)：0.9771
+2026-03-11 08:57:09 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:09 - ml_platform_api - INFO - MAE (平均绝对误差)：2.5536
+2026-03-11 08:57:09 - ml_platform_api - INFO - MSE (均方误差)：14.447
+2026-03-11 08:57:09 - ml_platform_api - INFO - RMSE (均方根误差)：3.8009
+2026-03-11 08:57:09 - ml_platform_api - INFO - R² (决定系数)：0.816
+2026-03-11 08:57:09 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:09 - ml_platform_api - INFO - MAE (平均绝对误差)：2.2776
+2026-03-11 08:57:09 - ml_platform_api - INFO - MSE (均方误差)：11.331
+2026-03-11 08:57:09 - ml_platform_api - INFO - RMSE (均方根误差)：3.3662
+2026-03-11 08:57:09 - ml_platform_api - INFO - R² (决定系数)：0.8455
+2026-03-11 08:57:09 - ml_platform_api - INFO - 随机森林回归特征重要性：
+              特征    重要性
+     numeric__RM 0.5504
+  numeric__LSTAT 0.2815
+    numeric__DIS 0.0481
+   numeric__CRIM 0.0315
+    numeric__TAX 0.0218
+    numeric__AGE 0.0146
+      numeric__B 0.0138
+numeric__PTRATIO 0.0130
+    numeric__NOX 0.0088
+  numeric__INDUS 0.0074
+    numeric__RAD 0.0045
+     numeric__ZN 0.0028
+   numeric__CHAS 0.0017
+2026-03-11 08:57:09 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 0.9235,
+      "mse": 2.0559,
+      "rmse": 1.4338,
+      "r2": 0.9771
+},
+      "val": {
+      "mae": 2.5536,
+      "mse": 14.447,
+      "rmse": 3.8009,
+      "r2": 0.816
+},
+      "test": {
+      "mae": 2.2776,
+      "mse": 11.331,
+      "rmse": 3.3662,
+      "r2": 0.8455
+}
+}
+2026-03-11 08:57:09 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\random_forest_model_20260311_085709.pkl
+2026-03-11 08:57:14 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:14 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:14 - ml_platform_api - INFO - 使用模型参数：{}
+2026-03-11 08:57:14 - ml_platform_api - INFO - 开始训练LR模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:14 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:14 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:14 - ml_platform_api - INFO - MAE (平均绝对误差)：3.3521
+2026-03-11 08:57:14 - ml_platform_api - INFO - MSE (均方误差)：21.6244
+2026-03-11 08:57:14 - ml_platform_api - INFO - RMSE (均方根误差)：4.6502
+2026-03-11 08:57:14 - ml_platform_api - INFO - R² (决定系数)：0.7588
+2026-03-11 08:57:14 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:14 - ml_platform_api - INFO - MAE (平均绝对误差)：3.2049
+2026-03-11 08:57:14 - ml_platform_api - INFO - MSE (均方误差)：22.3651
+2026-03-11 08:57:14 - ml_platform_api - INFO - RMSE (均方根误差)：4.7292
+2026-03-11 08:57:14 - ml_platform_api - INFO - R² (决定系数)：0.7151
+2026-03-11 08:57:14 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:14 - ml_platform_api - INFO - MAE (平均绝对误差)：3.2806
+2026-03-11 08:57:14 - ml_platform_api - INFO - MSE (均方误差)：25.298
+2026-03-11 08:57:14 - ml_platform_api - INFO - RMSE (均方根误差)：5.0297
+2026-03-11 08:57:14 - ml_platform_api - INFO - R² (决定系数)：0.655
+2026-03-11 08:57:14 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 3.3521,
+      "mse": 21.6244,
+      "rmse": 4.6502,
+      "r2": 0.7588
+},
+      "val": {
+      "mae": 3.2049,
+      "mse": 22.3651,
+      "rmse": 4.7292,
+      "r2": 0.7151
+},
+      "test": {
+      "mae": 3.2806,
+      "mse": 25.298,
+      "rmse": 5.0297,
+      "r2": 0.655
+}
+}
+2026-03-11 08:57:14 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\LR_model_20260311_085714.pkl
+2026-03-11 08:57:17 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:17 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:17 - ml_platform_api - INFO - 使用模型参数：{'n_neighbors': 5, 'weights': 'uniform', 'p': 2}
+2026-03-11 08:57:17 - ml_platform_api - INFO - 开始训练knn模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:17 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:17 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:17 - ml_platform_api - INFO - MAE (平均绝对误差)：2.4846
+2026-03-11 08:57:17 - ml_platform_api - INFO - MSE (均方误差)：14.7163
+2026-03-11 08:57:17 - ml_platform_api - INFO - RMSE (均方根误差)：3.8362
+2026-03-11 08:57:17 - ml_platform_api - INFO - R² (决定系数)：0.8359
+2026-03-11 08:57:17 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:17 - ml_platform_api - INFO - MAE (平均绝对误差)：3.4354
+2026-03-11 08:57:17 - ml_platform_api - INFO - MSE (均方误差)：27.2303
+2026-03-11 08:57:17 - ml_platform_api - INFO - RMSE (均方根误差)：5.2183
+2026-03-11 08:57:17 - ml_platform_api - INFO - R² (决定系数)：0.6531
+2026-03-11 08:57:17 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:17 - ml_platform_api - INFO - MAE (平均绝对误差)：2.9157
+2026-03-11 08:57:17 - ml_platform_api - INFO - MSE (均方误差)：24.1883
+2026-03-11 08:57:17 - ml_platform_api - INFO - RMSE (均方根误差)：4.9182
+2026-03-11 08:57:17 - ml_platform_api - INFO - R² (决定系数)：0.6702
+2026-03-11 08:57:17 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 2.4846,
+      "mse": 14.7163,
+      "rmse": 3.8362,
+      "r2": 0.8359
+},
+      "val": {
+      "mae": 3.4354,
+      "mse": 27.2303,
+      "rmse": 5.2183,
+      "r2": 0.6531
+},
+      "test": {
+      "mae": 2.9157,
+      "mse": 24.1883,
+      "rmse": 4.9182,
+      "r2": 0.6702
+}
+}
+2026-03-11 08:57:17 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\knn_model_20260311_085717.pkl
+2026-03-11 08:57:21 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:21 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:21 - ml_platform_api - INFO - 使用模型参数：{'max_depth': None, 'random_state': 42, 'min_samples_split': 2, 'min_samples_leaf': 1}
+2026-03-11 08:57:21 - ml_platform_api - INFO - 开始训练decision_tree模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:21 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:21 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:21 - ml_platform_api - INFO - MAE (平均绝对误差)：0.0
+2026-03-11 08:57:21 - ml_platform_api - INFO - MSE (均方误差)：0.0
+2026-03-11 08:57:21 - ml_platform_api - INFO - RMSE (均方根误差)：0.0
+2026-03-11 08:57:21 - ml_platform_api - INFO - R² (决定系数)：1.0
+2026-03-11 08:57:21 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:21 - ml_platform_api - INFO - MAE (平均绝对误差)：3.1812
+2026-03-11 08:57:21 - ml_platform_api - INFO - MSE (均方误差)：17.1043
+2026-03-11 08:57:21 - ml_platform_api - INFO - RMSE (均方根误差)：4.1357
+2026-03-11 08:57:21 - ml_platform_api - INFO - R² (决定系数)：0.7821
+2026-03-11 08:57:21 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:21 - ml_platform_api - INFO - MAE (平均绝对误差)：3.0039
+2026-03-11 08:57:21 - ml_platform_api - INFO - MSE (均方误差)：26.6812
+2026-03-11 08:57:21 - ml_platform_api - INFO - RMSE (均方根误差)：5.1654
+2026-03-11 08:57:21 - ml_platform_api - INFO - R² (决定系数)：0.6362
+2026-03-11 08:57:21 - ml_platform_api - INFO - 随机森林回归特征重要性：
+              特征    重要性
+     numeric__RM 0.6092
+  numeric__LSTAT 0.2092
+   numeric__CRIM 0.0656
+    numeric__DIS 0.0593
+    numeric__TAX 0.0258
+    numeric__NOX 0.0072
+      numeric__B 0.0069
+  numeric__INDUS 0.0065
+numeric__PTRATIO 0.0046
+    numeric__AGE 0.0040
+    numeric__RAD 0.0017
+     numeric__ZN 0.0001
+   numeric__CHAS 0.0001
+2026-03-11 08:57:21 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 0.0,
+      "mse": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0
+},
+      "val": {
+      "mae": 3.1812,
+      "mse": 17.1043,
+      "rmse": 4.1357,
+      "r2": 0.7821
+},
+      "test": {
+      "mae": 3.0039,
+      "mse": 26.6812,
+      "rmse": 5.1654,
+      "r2": 0.6362
+}
+}
+2026-03-11 08:57:21 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\decision_tree_model_20260311_085721.pkl
+2026-03-11 08:57:27 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:27 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:27 - ml_platform_api - INFO - 使用模型参数：{'kernel': 'rbf', 'gamma': 'scale'}
+2026-03-11 08:57:27 - ml_platform_api - INFO - 开始训练svm模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:27 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:27 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:27 - ml_platform_api - INFO - MAE (平均绝对误差)：3.2116
+2026-03-11 08:57:27 - ml_platform_api - INFO - MSE (均方误差)：31.4719
+2026-03-11 08:57:27 - ml_platform_api - INFO - RMSE (均方根误差)：5.61
+2026-03-11 08:57:27 - ml_platform_api - INFO - R² (决定系数)：0.649
+2026-03-11 08:57:27 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:27 - ml_platform_api - INFO - MAE (平均绝对误差)：3.3124
+2026-03-11 08:57:27 - ml_platform_api - INFO - MSE (均方误差)：30.5146
+2026-03-11 08:57:27 - ml_platform_api - INFO - RMSE (均方根误差)：5.524
+2026-03-11 08:57:27 - ml_platform_api - INFO - R² (决定系数)：0.6113
+2026-03-11 08:57:27 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:27 - ml_platform_api - INFO - MAE (平均绝对误差)：2.9881
+2026-03-11 08:57:27 - ml_platform_api - INFO - MSE (均方误差)：29.9052
+2026-03-11 08:57:27 - ml_platform_api - INFO - RMSE (均方根误差)：5.4686
+2026-03-11 08:57:27 - ml_platform_api - INFO - R² (决定系数)：0.5922
+2026-03-11 08:57:27 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 3.2116,
+      "mse": 31.4719,
+      "rmse": 5.61,
+      "r2": 0.649
+},
+      "val": {
+      "mae": 3.3124,
+      "mse": 30.5146,
+      "rmse": 5.524,
+      "r2": 0.6113
+},
+      "test": {
+      "mae": 2.9881,
+      "mse": 29.9052,
+      "rmse": 5.4686,
+      "r2": 0.5922
+}
+}
+2026-03-11 08:57:27 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\svm_model_20260311_085727.pkl
+2026-03-11 08:57:29 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:29 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:29 - ml_platform_api - INFO - 使用模型参数：{'kernel': 'rbf', 'gamma': 'scale'}
+2026-03-11 08:57:29 - ml_platform_api - INFO - 开始训练svm模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:29 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:29 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:29 - ml_platform_api - INFO - MAE (平均绝对误差)：3.2116
+2026-03-11 08:57:29 - ml_platform_api - INFO - MSE (均方误差)：31.4719
+2026-03-11 08:57:29 - ml_platform_api - INFO - RMSE (均方根误差)：5.61
+2026-03-11 08:57:29 - ml_platform_api - INFO - R² (决定系数)：0.649
+2026-03-11 08:57:29 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:29 - ml_platform_api - INFO - MAE (平均绝对误差)：3.3124
+2026-03-11 08:57:29 - ml_platform_api - INFO - MSE (均方误差)：30.5146
+2026-03-11 08:57:29 - ml_platform_api - INFO - RMSE (均方根误差)：5.524
+2026-03-11 08:57:29 - ml_platform_api - INFO - R² (决定系数)：0.6113
+2026-03-11 08:57:29 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:29 - ml_platform_api - INFO - MAE (平均绝对误差)：2.9881
+2026-03-11 08:57:29 - ml_platform_api - INFO - MSE (均方误差)：29.9052
+2026-03-11 08:57:29 - ml_platform_api - INFO - RMSE (均方根误差)：5.4686
+2026-03-11 08:57:29 - ml_platform_api - INFO - R² (决定系数)：0.5922
+2026-03-11 08:57:29 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 3.2116,
+      "mse": 31.4719,
+      "rmse": 5.61,
+      "r2": 0.649
+},
+      "val": {
+      "mae": 3.3124,
+      "mse": 30.5146,
+      "rmse": 5.524,
+      "r2": 0.6113
+},
+      "test": {
+      "mae": 2.9881,
+      "mse": 29.9052,
+      "rmse": 5.4686,
+      "r2": 0.5922
+}
+}
+2026-03-11 08:57:29 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\svm_model_20260311_085729.pkl
+2026-03-11 08:57:34 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:34 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:34 - ml_platform_api - INFO - 使用模型参数：{'alpha': 3.0, 'max_iter': 1000, 'selection': 'cyclic'}
+2026-03-11 08:57:34 - ml_platform_api - INFO - 开始训练lasso模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:34 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:34 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:34 - ml_platform_api - INFO - MAE (平均绝对误差)：4.6374
+2026-03-11 08:57:34 - ml_platform_api - INFO - MSE (均方误差)：41.7784
+2026-03-11 08:57:34 - ml_platform_api - INFO - RMSE (均方根误差)：6.4636
+2026-03-11 08:57:34 - ml_platform_api - INFO - R² (决定系数)：0.5341
+2026-03-11 08:57:34 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:34 - ml_platform_api - INFO - MAE (平均绝对误差)：4.3029
+2026-03-11 08:57:34 - ml_platform_api - INFO - MSE (均方误差)：37.7039
+2026-03-11 08:57:34 - ml_platform_api - INFO - RMSE (均方根误差)：6.1404
+2026-03-11 08:57:34 - ml_platform_api - INFO - R² (决定系数)：0.5197
+2026-03-11 08:57:34 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:34 - ml_platform_api - INFO - MAE (平均绝对误差)：4.1443
+2026-03-11 08:57:34 - ml_platform_api - INFO - MSE (均方误差)：36.5769
+2026-03-11 08:57:34 - ml_platform_api - INFO - RMSE (均方根误差)：6.0479
+2026-03-11 08:57:34 - ml_platform_api - INFO - R² (决定系数)：0.5012
+2026-03-11 08:57:34 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 4.6374,
+      "mse": 41.7784,
+      "rmse": 6.4636,
+      "r2": 0.5341
+},
+      "val": {
+      "mae": 4.3029,
+      "mse": 37.7039,
+      "rmse": 6.1404,
+      "r2": 0.5197
+},
+      "test": {
+      "mae": 4.1443,
+      "mse": 36.5769,
+      "rmse": 6.0479,
+      "r2": 0.5012
+}
+}
+2026-03-11 08:57:34 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\lasso_model_20260311_085734.pkl
+2026-03-11 08:57:41 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:41 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:41 - ml_platform_api - INFO - 使用模型参数：{'loss': 'squared_error', 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 1.0, 'criterion': 'friedman_mse', 'max_depth': 3, 'random_state': 42}
+2026-03-11 08:57:41 - ml_platform_api - INFO - 开始训练gboost模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:42 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:42 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:42 - ml_platform_api - INFO - MAE (平均绝对误差)：0.9073
+2026-03-11 08:57:42 - ml_platform_api - INFO - MSE (均方误差)：1.3425
+2026-03-11 08:57:42 - ml_platform_api - INFO - RMSE (均方根误差)：1.1587
+2026-03-11 08:57:42 - ml_platform_api - INFO - R² (决定系数)：0.985
+2026-03-11 08:57:42 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:42 - ml_platform_api - INFO - MAE (平均绝对误差)：2.2547
+2026-03-11 08:57:42 - ml_platform_api - INFO - MSE (均方误差)：10.8957
+2026-03-11 08:57:42 - ml_platform_api - INFO - RMSE (均方根误差)：3.3009
+2026-03-11 08:57:42 - ml_platform_api - INFO - R² (决定系数)：0.8612
+2026-03-11 08:57:42 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:42 - ml_platform_api - INFO - MAE (平均绝对误差)：2.1307
+2026-03-11 08:57:42 - ml_platform_api - INFO - MSE (均方误差)：9.4223
+2026-03-11 08:57:42 - ml_platform_api - INFO - RMSE (均方根误差)：3.0696
+2026-03-11 08:57:42 - ml_platform_api - INFO - R² (决定系数)：0.8715
+2026-03-11 08:57:42 - ml_platform_api - INFO - 随机森林回归特征重要性：
+              特征    重要性
+     numeric__RM 0.5208
+  numeric__LSTAT 0.3011
+    numeric__DIS 0.0542
+   numeric__CRIM 0.0269
+numeric__PTRATIO 0.0265
+    numeric__TAX 0.0185
+    numeric__NOX 0.0163
+      numeric__B 0.0116
+    numeric__RAD 0.0084
+    numeric__AGE 0.0078
+  numeric__INDUS 0.0072
+     numeric__ZN 0.0006
+   numeric__CHAS 0.0001
+2026-03-11 08:57:42 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 0.9073,
+      "mse": 1.3425,
+      "rmse": 1.1587,
+      "r2": 0.985
+},
+      "val": {
+      "mae": 2.2547,
+      "mse": 10.8957,
+      "rmse": 3.3009,
+      "r2": 0.8612
+},
+      "test": {
+      "mae": 2.1307,
+      "mse": 9.4223,
+      "rmse": 3.0696,
+      "r2": 0.8715
+}
+}
+2026-03-11 08:57:42 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\gboost_model_20260311_085742.pkl
+2026-03-11 08:57:47 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:47 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:47 - ml_platform_api - INFO - 使用模型参数：{'objective': 'reg:squarederror', 'learning_rate': 0.1, 'n_estimators': 100, 'max_depth': 3, 'subsample': 1.0, 'colsample_bytree': 1.0, 'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1, 'random_state': 42}
+2026-03-11 08:57:47 - ml_platform_api - INFO - 开始训练xgboost模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:47 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:47 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:47 - ml_platform_api - INFO - MAE (平均绝对误差)：0.996
+2026-03-11 08:57:47 - ml_platform_api - INFO - MSE (均方误差)：1.6989
+2026-03-11 08:57:47 - ml_platform_api - INFO - RMSE (均方根误差)：1.3034
+2026-03-11 08:57:47 - ml_platform_api - INFO - R² (决定系数)：0.9811
+2026-03-11 08:57:47 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:47 - ml_platform_api - INFO - MAE (平均绝对误差)：2.2703
+2026-03-11 08:57:47 - ml_platform_api - INFO - MSE (均方误差)：10.0552
+2026-03-11 08:57:47 - ml_platform_api - INFO - RMSE (均方根误差)：3.171
+2026-03-11 08:57:47 - ml_platform_api - INFO - R² (决定系数)：0.8719
+2026-03-11 08:57:47 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:47 - ml_platform_api - INFO - MAE (平均绝对误差)：2.2111
+2026-03-11 08:57:47 - ml_platform_api - INFO - MSE (均方误差)：10.2383
+2026-03-11 08:57:47 - ml_platform_api - INFO - RMSE (均方根误差)：3.1997
+2026-03-11 08:57:47 - ml_platform_api - INFO - R² (决定系数)：0.8604
+2026-03-11 08:57:47 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 0.996,
+      "mse": 1.6989,
+      "rmse": 1.3034,
+      "r2": 0.9811
+},
+      "val": {
+      "mae": 2.2703,
+      "mse": 10.0552,
+      "rmse": 3.171,
+      "r2": 0.8719
+},
+      "test": {
+      "mae": 2.2111,
+      "mse": 10.2383,
+      "rmse": 3.1997,
+      "r2": 0.8604
+}
+}
+2026-03-11 08:57:47 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\xgboost_model_20260311_085747.pkl
+2026-03-11 08:57:51 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:51 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:51 - ml_platform_api - INFO - 使用模型参数：{'objective': 'regression', 'metric': 'mse', 'learning_rate': 0.1, 'n_estimators': 100, 'max_depth': -1, 'num_leaves': 31, 'subsample': 1.0, 'colsample_bytree': 1.0, 'random_state': 42}
+2026-03-11 08:57:51 - ml_platform_api - INFO - 开始训练lightgbm模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:52 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:52 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:52 - ml_platform_api - INFO - MAE (平均绝对误差)：1.0003
+2026-03-11 08:57:52 - ml_platform_api - INFO - MSE (均方误差)：2.7943
+2026-03-11 08:57:52 - ml_platform_api - INFO - RMSE (均方根误差)：1.6716
+2026-03-11 08:57:52 - ml_platform_api - INFO - R² (决定系数)：0.9688
+2026-03-11 08:57:52 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:52 - ml_platform_api - INFO - MAE (平均绝对误差)：2.3672
+2026-03-11 08:57:52 - ml_platform_api - INFO - MSE (均方误差)：12.5976
+2026-03-11 08:57:52 - ml_platform_api - INFO - RMSE (均方根误差)：3.5493
+2026-03-11 08:57:52 - ml_platform_api - INFO - R² (决定系数)：0.8395
+2026-03-11 08:57:52 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:52 - ml_platform_api - INFO - MAE (平均绝对误差)：2.0889
+2026-03-11 08:57:52 - ml_platform_api - INFO - MSE (均方误差)：10.6898
+2026-03-11 08:57:52 - ml_platform_api - INFO - RMSE (均方根误差)：3.2695
+2026-03-11 08:57:52 - ml_platform_api - INFO - R² (决定系数)：0.8542
+2026-03-11 08:57:52 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 1.0003,
+      "mse": 2.7943,
+      "rmse": 1.6716,
+      "r2": 0.9688
+},
+      "val": {
+      "mae": 2.3672,
+      "mse": 12.5976,
+      "rmse": 3.5493,
+      "r2": 0.8395
+},
+      "test": {
+      "mae": 2.0889,
+      "mse": 10.6898,
+      "rmse": 3.2695,
+      "r2": 0.8542
+}
+}
+2026-03-11 08:57:52 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\lightgbm_model_20260311_085752.pkl
+2026-03-11 08:57:56 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:56 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:56 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 50, 'learning_rate': 1.0, 'loss': 'linear', 'random_state': 42}
+2026-03-11 08:57:56 - ml_platform_api - INFO - 开始训练adaboost模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:57:56 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:57:56 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:57:56 - ml_platform_api - INFO - MAE (平均绝对误差)：2.1589
+2026-03-11 08:57:56 - ml_platform_api - INFO - MSE (均方误差)：6.9339
+2026-03-11 08:57:56 - ml_platform_api - INFO - RMSE (均方根误差)：2.6332
+2026-03-11 08:57:56 - ml_platform_api - INFO - R² (决定系数)：0.9227
+2026-03-11 08:57:56 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:57:56 - ml_platform_api - INFO - MAE (平均绝对误差)：2.8367
+2026-03-11 08:57:56 - ml_platform_api - INFO - MSE (均方误差)：17.4199
+2026-03-11 08:57:56 - ml_platform_api - INFO - RMSE (均方根误差)：4.1737
+2026-03-11 08:57:56 - ml_platform_api - INFO - R² (决定系数)：0.7781
+2026-03-11 08:57:56 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:57:56 - ml_platform_api - INFO - MAE (平均绝对误差)：2.7235
+2026-03-11 08:57:56 - ml_platform_api - INFO - MSE (均方误差)：15.4158
+2026-03-11 08:57:56 - ml_platform_api - INFO - RMSE (均方根误差)：3.9263
+2026-03-11 08:57:56 - ml_platform_api - INFO - R² (决定系数)：0.7898
+2026-03-11 08:57:56 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 2.1589,
+      "mse": 6.9339,
+      "rmse": 2.6332,
+      "r2": 0.9227
+},
+      "val": {
+      "mae": 2.8367,
+      "mse": 17.4199,
+      "rmse": 4.1737,
+      "r2": 0.7781
+},
+      "test": {
+      "mae": 2.7235,
+      "mse": 15.4158,
+      "rmse": 3.9263,
+      "r2": 0.7898
+}
+}
+2026-03-11 08:57:56 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\adaboost_model_20260311_085756.pkl
+2026-03-11 08:57:59 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\processed_data.npz
+2026-03-11 08:57:59 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 08:57:59 - ml_platform_api - INFO - 使用模型参数：{'hidden_layer_sizes': (64, 32), 'activation': 'relu', 'solver': 'adam', 'alpha': 0.0001, 'learning_rate': 'adaptive', 'learning_rate_init': 0.001, 'max_iter': 1000, 'random_state': 42, 'early_stopping': True}
+2026-03-11 08:57:59 - ml_platform_api - INFO - 开始训练mlp模型 | 数据集ID：820b11fd-4aa4-497b-8d51-54431892c876 | 划分ID：820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657
+2026-03-11 08:58:00 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 08:58:00 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 08:58:00 - ml_platform_api - INFO - MAE (平均绝对误差)：2.017
+2026-03-11 08:58:00 - ml_platform_api - INFO - MSE (均方误差)：7.5907
+2026-03-11 08:58:00 - ml_platform_api - INFO - RMSE (均方根误差)：2.7551
+2026-03-11 08:58:00 - ml_platform_api - INFO - R² (决定系数)：0.9153
+2026-03-11 08:58:00 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 08:58:00 - ml_platform_api - INFO - MAE (平均绝对误差)：2.769
+2026-03-11 08:58:00 - ml_platform_api - INFO - MSE (均方误差)：14.1792
+2026-03-11 08:58:00 - ml_platform_api - INFO - RMSE (均方根误差)：3.7655
+2026-03-11 08:58:00 - ml_platform_api - INFO - R² (决定系数)：0.8194
+2026-03-11 08:58:00 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 08:58:00 - ml_platform_api - INFO - MAE (平均绝对误差)：2.2643
+2026-03-11 08:58:00 - ml_platform_api - INFO - MSE (均方误差)：11.8893
+2026-03-11 08:58:00 - ml_platform_api - INFO - RMSE (均方根误差)：3.4481
+2026-03-11 08:58:00 - ml_platform_api - INFO - R² (决定系数)：0.8379
+2026-03-11 08:58:00 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 2.017,
+      "mse": 7.5907,
+      "rmse": 2.7551,
+      "r2": 0.9153
+},
+      "val": {
+      "mae": 2.769,
+      "mse": 14.1792,
+      "rmse": 3.7655,
+      "r2": 0.8194
+},
+      "test": {
+      "mae": 2.2643,
+      "mse": 11.8893,
+      "rmse": 3.4481,
+      "r2": 0.8379
+}
+}
+2026-03-11 08:58:00 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\820b11fd-4aa4-497b-8d51-54431892c876_split_20260311_085657\mlp_model_20260311_085800.pkl
+2026-03-11 10:30:03 - ml_platform_api - INFO - 数据集上传成功：ID=92c5d46a-fdde-4006-8e53-0974639d8db0，文件名=boston_house_prices.csv（存储为38fcd448-f1f5-47bb-83f5-6aef8b55f290.csv）
+2026-03-11 10:30:08 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\92c5d46a-fdde-4006-8e53-0974639d8db0_processed_20260311_103008.csv
+2026-03-11 10:30:08 - ml_platform_api - INFO - 数据集92c5d46a-fdde-4006-8e53-0974639d8db0统一处理完成：处理列=['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-11 10:30:16 - ml_platform_api - INFO - 通过processed_ID 92c5d46a-fdde-4006-8e53-0974639d8db0_processed_20260311_103008 匹配到文件：./uploads\processed\92c5d46a-fdde-4006-8e53-0974639d8db0_processed_20260311_103008.csv
+2026-03-11 10:30:16 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-11 10:30:16 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-11 10:30:16 - ml_platform_api - INFO - 数值特征列：['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+2026-03-11 10:30:16 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-11 10:30:16 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-11 10:30:16 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-11 10:30:16 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-11 10:30:16 - ml_platform_api - INFO - 特征列编码映射关系：{'CRIM': '数值列（无编码，标准化）', 'ZN': '数值列（无编码，标准化）', 'INDUS': '数值列（无编码，标准化）', 'CHAS': '数值列（无编码，标准化）', 'NOX': '数值列（无编码，标准化）', 'RM': '数值列（无编码，标准化）', 'AGE': '数值列（无编码，标准化）', 'DIS': '数值列（无编码，标准化）', 'RAD': '数值列（无编码，标准化）', 'TAX': '数值列（无编码，标准化）', 'PTRATIO': '数值列（无编码，标准化）', 'B': '数值列（无编码，标准化）', 'LSTAT': '数值列（无编码，标准化）'}
+2026-03-11 10:30:16 - ml_platform_api - INFO - 编码后的特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 10:30:16 - ml_platform_api - INFO - 编码后的特征矩阵形状：(506, 13)
+2026-03-11 10:30:16 - ml_platform_api - INFO - 标签列名：MEDV
+2026-03-11 10:30:16 - ml_platform_api - INFO - 标签列原始类型：float64
+2026-03-11 10:30:16 - ml_platform_api - INFO - 标签列前5个值：[24.0, 21.6, 34.7, 33.4, 36.2]
+2026-03-11 10:30:16 - ml_platform_api - INFO - 标签列为连续数值类型，无需编码（回归任务）
+2026-03-11 10:30:16 - ml_platform_api - INFO - 数据集类别数：-1，类别列表：[]
+2026-03-11 10:30:16 - ml_platform_api - INFO - 编码后训练集特征维度：(303, 13)
+2026-03-11 10:30:16 - ml_platform_api - INFO - 编码后验证集特征维度：(101, 13)
+2026-03-11 10:30:16 - ml_platform_api - INFO - 编码后测试集特征维度：(102, 13)
+2026-03-11 10:30:17 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：92c5d46a-fdde-4006-8e53-0974639d8db0 | 标签列：MEDV | 总样本：506 | 训练集：303(59.9%) | 验证集：101(20.0%) | 测试集：102(20.2%) | 预处理数据保存路径：./uploads\split_datasets\92c5d46a-fdde-4006-8e53-0974639d8db0_split_20260311_103016
+2026-03-11 10:30:21 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\92c5d46a-fdde-4006-8e53-0974639d8db0_split_20260311_103016\processed_data.npz
+2026-03-11 10:30:21 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 10:30:21 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': None, 'random_state': 42}
+2026-03-11 10:30:21 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：92c5d46a-fdde-4006-8e53-0974639d8db0 | 划分ID：92c5d46a-fdde-4006-8e53-0974639d8db0_split_20260311_103016
+2026-03-11 10:30:22 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 10:30:22 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 10:30:22 - ml_platform_api - INFO - MAE (平均绝对误差)：0.9235
+2026-03-11 10:30:22 - ml_platform_api - INFO - MSE (均方误差)：2.0559
+2026-03-11 10:30:22 - ml_platform_api - INFO - RMSE (均方根误差)：1.4338
+2026-03-11 10:30:22 - ml_platform_api - INFO - R² (决定系数)：0.9771
+2026-03-11 10:30:22 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 10:30:22 - ml_platform_api - INFO - MAE (平均绝对误差)：2.5536
+2026-03-11 10:30:22 - ml_platform_api - INFO - MSE (均方误差)：14.447
+2026-03-11 10:30:22 - ml_platform_api - INFO - RMSE (均方根误差)：3.8009
+2026-03-11 10:30:22 - ml_platform_api - INFO - R² (决定系数)：0.816
+2026-03-11 10:30:22 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 10:30:22 - ml_platform_api - INFO - MAE (平均绝对误差)：2.2776
+2026-03-11 10:30:22 - ml_platform_api - INFO - MSE (均方误差)：11.331
+2026-03-11 10:30:22 - ml_platform_api - INFO - RMSE (均方根误差)：3.3662
+2026-03-11 10:30:22 - ml_platform_api - INFO - R² (决定系数)：0.8455
+2026-03-11 10:30:22 - ml_platform_api - INFO - 随机森林回归特征重要性：
+              特征    重要性
+     numeric__RM 0.5504
+  numeric__LSTAT 0.2815
+    numeric__DIS 0.0481
+   numeric__CRIM 0.0315
+    numeric__TAX 0.0218
+    numeric__AGE 0.0146
+      numeric__B 0.0138
+numeric__PTRATIO 0.0130
+    numeric__NOX 0.0088
+  numeric__INDUS 0.0074
+    numeric__RAD 0.0045
+     numeric__ZN 0.0028
+   numeric__CHAS 0.0017
+2026-03-11 10:30:22 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 0.9235,
+      "mse": 2.0559,
+      "rmse": 1.4338,
+      "r2": 0.9771
+},
+      "val": {
+      "mae": 2.5536,
+      "mse": 14.447,
+      "rmse": 3.8009,
+      "r2": 0.816
+},
+      "test": {
+      "mae": 2.2776,
+      "mse": 11.331,
+      "rmse": 3.3662,
+      "r2": 0.8455
+}
+}
+2026-03-11 10:30:22 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\92c5d46a-fdde-4006-8e53-0974639d8db0_split_20260311_103016\random_forest_model_20260311_103022.pkl
+2026-03-11 10:47:33 - ml_platform_api - INFO - 数据集上传成功：ID=b3ceb619-992a-44b8-8afc-1480268c1d1c，文件名=boston_house_prices.csv（存储为3f2a17b0-0bf2-483f-a232-c49c4008d502.csv）
+2026-03-11 10:47:38 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\b3ceb619-992a-44b8-8afc-1480268c1d1c_processed_20260311_104738.csv
+2026-03-11 10:47:38 - ml_platform_api - INFO - 数据集b3ceb619-992a-44b8-8afc-1480268c1d1c统一处理完成：处理列=['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-11 10:47:44 - ml_platform_api - INFO - 通过processed_ID b3ceb619-992a-44b8-8afc-1480268c1d1c_processed_20260311_104738 匹配到文件：./uploads\processed\b3ceb619-992a-44b8-8afc-1480268c1d1c_processed_20260311_104738.csv
+2026-03-11 10:47:44 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-11 10:47:44 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-11 10:47:44 - ml_platform_api - INFO - 数值特征列：['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+2026-03-11 10:47:44 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-11 10:47:44 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-11 10:47:44 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-11 10:47:44 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-11 10:47:44 - ml_platform_api - INFO - 特征列编码映射关系：{'CRIM': '数值列（无编码，标准化）', 'ZN': '数值列（无编码，标准化）', 'INDUS': '数值列（无编码，标准化）', 'CHAS': '数值列（无编码，标准化）', 'NOX': '数值列（无编码，标准化）', 'RM': '数值列（无编码，标准化）', 'AGE': '数值列（无编码，标准化）', 'DIS': '数值列（无编码，标准化）', 'RAD': '数值列（无编码，标准化）', 'TAX': '数值列（无编码，标准化）', 'PTRATIO': '数值列（无编码，标准化）', 'B': '数值列（无编码，标准化）', 'LSTAT': '数值列（无编码，标准化）'}
+2026-03-11 10:47:44 - ml_platform_api - INFO - 编码后的特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 10:47:44 - ml_platform_api - INFO - 编码后的特征矩阵形状：(506, 13)
+2026-03-11 10:47:44 - ml_platform_api - INFO - 标签列名：MEDV
+2026-03-11 10:47:44 - ml_platform_api - INFO - 标签列原始类型：float64
+2026-03-11 10:47:44 - ml_platform_api - INFO - 标签列前5个值：[24.0, 21.6, 34.7, 33.4, 36.2]
+2026-03-11 10:47:44 - ml_platform_api - INFO - 标签列为连续数值类型，无需编码（回归任务）
+2026-03-11 10:47:44 - ml_platform_api - INFO - 数据集类别数：-1，类别列表：[]
+2026-03-11 10:47:44 - ml_platform_api - INFO - 编码后训练集特征维度：(303, 13)
+2026-03-11 10:47:44 - ml_platform_api - INFO - 编码后验证集特征维度：(101, 13)
+2026-03-11 10:47:44 - ml_platform_api - INFO - 编码后测试集特征维度：(102, 13)
+2026-03-11 10:47:44 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：b3ceb619-992a-44b8-8afc-1480268c1d1c | 标签列：MEDV | 总样本：506 | 训练集：303(59.9%) | 验证集：101(20.0%) | 测试集：102(20.2%) | 预处理数据保存路径：./uploads\split_datasets\b3ceb619-992a-44b8-8afc-1480268c1d1c_split_20260311_104744
+2026-03-11 10:47:49 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\b3ceb619-992a-44b8-8afc-1480268c1d1c_split_20260311_104744\processed_data.npz
+2026-03-11 10:47:49 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 10:47:49 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': None, 'random_state': 42}
+2026-03-11 10:47:49 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：b3ceb619-992a-44b8-8afc-1480268c1d1c | 划分ID：b3ceb619-992a-44b8-8afc-1480268c1d1c_split_20260311_104744
+2026-03-11 10:47:50 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 10:47:50 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 10:47:50 - ml_platform_api - INFO - MAE (平均绝对误差)：0.9235
+2026-03-11 10:47:50 - ml_platform_api - INFO - MSE (均方误差)：2.0559
+2026-03-11 10:47:50 - ml_platform_api - INFO - RMSE (均方根误差)：1.4338
+2026-03-11 10:47:50 - ml_platform_api - INFO - R² (决定系数)：0.9771
+2026-03-11 10:47:50 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 10:47:50 - ml_platform_api - INFO - MAE (平均绝对误差)：2.5536
+2026-03-11 10:47:50 - ml_platform_api - INFO - MSE (均方误差)：14.447
+2026-03-11 10:47:50 - ml_platform_api - INFO - RMSE (均方根误差)：3.8009
+2026-03-11 10:47:50 - ml_platform_api - INFO - R² (决定系数)：0.816
+2026-03-11 10:47:50 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 10:47:50 - ml_platform_api - INFO - MAE (平均绝对误差)：2.2776
+2026-03-11 10:47:50 - ml_platform_api - INFO - MSE (均方误差)：11.331
+2026-03-11 10:47:50 - ml_platform_api - INFO - RMSE (均方根误差)：3.3662
+2026-03-11 10:47:50 - ml_platform_api - INFO - R² (决定系数)：0.8455
+2026-03-11 10:47:50 - ml_platform_api - INFO - 随机森林回归特征重要性：
+              特征    重要性
+     numeric__RM 0.5504
+  numeric__LSTAT 0.2815
+    numeric__DIS 0.0481
+   numeric__CRIM 0.0315
+    numeric__TAX 0.0218
+    numeric__AGE 0.0146
+      numeric__B 0.0138
+numeric__PTRATIO 0.0130
+    numeric__NOX 0.0088
+  numeric__INDUS 0.0074
+    numeric__RAD 0.0045
+     numeric__ZN 0.0028
+   numeric__CHAS 0.0017
+2026-03-11 10:47:50 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 0.9235,
+      "mse": 2.0559,
+      "rmse": 1.4338,
+      "r2": 0.9771
+},
+      "val": {
+      "mae": 2.5536,
+      "mse": 14.447,
+      "rmse": 3.8009,
+      "r2": 0.816
+},
+      "test": {
+      "mae": 2.2776,
+      "mse": 11.331,
+      "rmse": 3.3662,
+      "r2": 0.8455
+}
+}
+2026-03-11 10:47:50 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\b3ceb619-992a-44b8-8afc-1480268c1d1c_split_20260311_104744\random_forest_model_20260311_104750.pkl
+2026-03-11 15:51:24 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\b3ceb619-992a-44b8-8afc-1480268c1d1c_split_20260311_104744\processed_data.npz
+2026-03-11 15:51:24 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-11 15:51:24 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': None, 'random_state': 42}
+2026-03-11 15:51:24 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：b3ceb619-992a-44b8-8afc-1480268c1d1c | 划分ID：b3ceb619-992a-44b8-8afc-1480268c1d1c_split_20260311_104744
+2026-03-11 15:51:25 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-11 15:51:25 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-11 15:51:25 - ml_platform_api - INFO - MAE (平均绝对误差)：0.9235
+2026-03-11 15:51:25 - ml_platform_api - INFO - MSE (均方误差)：2.0559
+2026-03-11 15:51:25 - ml_platform_api - INFO - RMSE (均方根误差)：1.4338
+2026-03-11 15:51:25 - ml_platform_api - INFO - R² (决定系数)：0.9771
+2026-03-11 15:51:25 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-11 15:51:25 - ml_platform_api - INFO - MAE (平均绝对误差)：2.5536
+2026-03-11 15:51:25 - ml_platform_api - INFO - MSE (均方误差)：14.447
+2026-03-11 15:51:25 - ml_platform_api - INFO - RMSE (均方根误差)：3.8009
+2026-03-11 15:51:25 - ml_platform_api - INFO - R² (决定系数)：0.816
+2026-03-11 15:51:25 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-11 15:51:25 - ml_platform_api - INFO - MAE (平均绝对误差)：2.2776
+2026-03-11 15:51:25 - ml_platform_api - INFO - MSE (均方误差)：11.331
+2026-03-11 15:51:25 - ml_platform_api - INFO - RMSE (均方根误差)：3.3662
+2026-03-11 15:51:25 - ml_platform_api - INFO - R² (决定系数)：0.8455
+2026-03-11 15:51:25 - ml_platform_api - INFO - 随机森林回归特征重要性：
+              特征    重要性
+     numeric__RM 0.5504
+  numeric__LSTAT 0.2815
+    numeric__DIS 0.0481
+   numeric__CRIM 0.0315
+    numeric__TAX 0.0218
+    numeric__AGE 0.0146
+      numeric__B 0.0138
+numeric__PTRATIO 0.0130
+    numeric__NOX 0.0088
+  numeric__INDUS 0.0074
+    numeric__RAD 0.0045
+     numeric__ZN 0.0028
+   numeric__CHAS 0.0017
+2026-03-11 15:51:25 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 0.9235,
+      "mse": 2.0559,
+      "rmse": 1.4338,
+      "r2": 0.9771
+},
+      "val": {
+      "mae": 2.5536,
+      "mse": 14.447,
+      "rmse": 3.8009,
+      "r2": 0.816
+},
+      "test": {
+      "mae": 2.2776,
+      "mse": 11.331,
+      "rmse": 3.3662,
+      "r2": 0.8455
+}
+}
+2026-03-11 15:51:25 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\b3ceb619-992a-44b8-8afc-1480268c1d1c_split_20260311_104744\random_forest_model_20260311_155125.pkl

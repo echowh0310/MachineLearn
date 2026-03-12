@@ -1,0 +1,148 @@
+2026-03-12 10:09:48 - ml_platform_api - INFO - 数据集上传成功：ID=f1d0caba-fe0e-4e8e-a15c-2cb925182767，文件名=boston_house_prices.csv（存储为d7b5d795-30f7-4a67-9621-569877416936.csv）
+2026-03-12 10:09:59 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\f1d0caba-fe0e-4e8e-a15c-2cb925182767_processed_20260312_100959.csv
+2026-03-12 10:09:59 - ml_platform_api - INFO - 数据集f1d0caba-fe0e-4e8e-a15c-2cb925182767统一处理完成：处理列=['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']，空值方法=mean_cols，异常值方法=save_outlier
+2026-03-12 10:10:07 - ml_platform_api - INFO - 通过processed_ID f1d0caba-fe0e-4e8e-a15c-2cb925182767_processed_20260312_100959 匹配到文件：./uploads\processed\f1d0caba-fe0e-4e8e-a15c-2cb925182767_processed_20260312_100959.csv
+2026-03-12 10:10:07 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-12 10:10:07 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-12 10:10:07 - ml_platform_api - INFO - 数值特征列：['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+2026-03-12 10:10:07 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-12 10:10:07 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-12 10:10:07 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-12 10:10:07 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-12 10:10:07 - ml_platform_api - INFO - 特征列编码映射关系：{'CRIM': '数值列（无编码，标准化）', 'ZN': '数值列（无编码，标准化）', 'INDUS': '数值列（无编码，标准化）', 'CHAS': '数值列（无编码，标准化）', 'NOX': '数值列（无编码，标准化）', 'RM': '数值列（无编码，标准化）', 'AGE': '数值列（无编码，标准化）', 'DIS': '数值列（无编码，标准化）', 'RAD': '数值列（无编码，标准化）', 'TAX': '数值列（无编码，标准化）', 'PTRATIO': '数值列（无编码，标准化）', 'B': '数值列（无编码，标准化）', 'LSTAT': '数值列（无编码，标准化）'}
+2026-03-12 10:10:07 - ml_platform_api - INFO - 编码后的特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-12 10:10:07 - ml_platform_api - INFO - 编码后的特征矩阵形状：(506, 13)
+2026-03-12 10:10:07 - ml_platform_api - INFO - 标签列名：MEDV
+2026-03-12 10:10:07 - ml_platform_api - INFO - 标签列原始类型：float64
+2026-03-12 10:10:07 - ml_platform_api - INFO - 标签列前5个值：[24.0, 21.6, 34.7, 33.4, 36.2]
+2026-03-12 10:10:07 - ml_platform_api - INFO - 标签列为连续数值类型，无需编码（回归任务）
+2026-03-12 10:10:07 - ml_platform_api - INFO - 数据集类别数：-1，类别列表：[]
+2026-03-12 10:10:07 - ml_platform_api - INFO - 编码后训练集特征维度：(303, 13)
+2026-03-12 10:10:07 - ml_platform_api - INFO - 编码后验证集特征维度：(101, 13)
+2026-03-12 10:10:07 - ml_platform_api - INFO - 编码后测试集特征维度：(102, 13)
+2026-03-12 10:10:07 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：f1d0caba-fe0e-4e8e-a15c-2cb925182767 | 标签列：MEDV | 总样本：506 | 训练集：303(59.9%) | 验证集：101(20.0%) | 测试集：102(20.2%) | 预处理数据保存路径：./uploads\split_datasets\f1d0caba-fe0e-4e8e-a15c-2cb925182767_split_20260312_101007
+2026-03-12 10:10:13 - ml_platform_api - INFO - 通过processed_ID f1d0caba-fe0e-4e8e-a15c-2cb925182767_processed_20260312_100959 匹配到文件：./uploads\processed\f1d0caba-fe0e-4e8e-a15c-2cb925182767_processed_20260312_100959.csv
+2026-03-12 10:10:13 - ml_platform_api - INFO - 独热编码列为空，已跳过
+2026-03-12 10:10:13 - ml_platform_api - INFO - 序列编码列为空，已跳过
+2026-03-12 10:10:13 - ml_platform_api - INFO - 数值特征列：['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+2026-03-12 10:10:13 - ml_platform_api - INFO - 未编码文本特征列：[]
+2026-03-12 10:10:13 - ml_platform_api - INFO - 独热编码列：[]
+2026-03-12 10:10:13 - ml_platform_api - INFO - 序列编码列：[]
+2026-03-12 10:10:14 - ml_platform_api - INFO - 数值列标准化开关：is_standard = True
+2026-03-12 10:10:14 - ml_platform_api - INFO - 特征列编码映射关系：{'CRIM': '数值列（无编码，标准化）', 'ZN': '数值列（无编码，标准化）', 'INDUS': '数值列（无编码，标准化）', 'CHAS': '数值列（无编码，标准化）', 'NOX': '数值列（无编码，标准化）', 'RM': '数值列（无编码，标准化）', 'AGE': '数值列（无编码，标准化）', 'DIS': '数值列（无编码，标准化）', 'RAD': '数值列（无编码，标准化）', 'TAX': '数值列（无编码，标准化）', 'PTRATIO': '数值列（无编码，标准化）', 'B': '数值列（无编码，标准化）', 'LSTAT': '数值列（无编码，标准化）'}
+2026-03-12 10:10:14 - ml_platform_api - INFO - 编码后的特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-12 10:10:14 - ml_platform_api - INFO - 编码后的特征矩阵形状：(506, 13)
+2026-03-12 10:10:14 - ml_platform_api - INFO - 标签列名：MEDV
+2026-03-12 10:10:14 - ml_platform_api - INFO - 标签列原始类型：float64
+2026-03-12 10:10:14 - ml_platform_api - INFO - 标签列前5个值：[24.0, 21.6, 34.7, 33.4, 36.2]
+2026-03-12 10:10:14 - ml_platform_api - INFO - 标签列为连续数值类型，无需编码（回归任务）
+2026-03-12 10:10:14 - ml_platform_api - INFO - 数据集类别数：-1，类别列表：[]
+2026-03-12 10:10:14 - ml_platform_api - INFO - 编码后训练集特征维度：(303, 13)
+2026-03-12 10:10:14 - ml_platform_api - INFO - 编码后验证集特征维度：(101, 13)
+2026-03-12 10:10:14 - ml_platform_api - INFO - 编码后测试集特征维度：(102, 13)
+2026-03-12 10:10:14 - ml_platform_api - INFO - 数据集处理完成 | 原始ID：f1d0caba-fe0e-4e8e-a15c-2cb925182767 | 标签列：MEDV | 总样本：506 | 训练集：303(59.9%) | 验证集：101(20.0%) | 测试集：102(20.2%) | 预处理数据保存路径：./uploads\split_datasets\f1d0caba-fe0e-4e8e-a15c-2cb925182767_split_20260312_101014
+2026-03-12 10:10:21 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\f1d0caba-fe0e-4e8e-a15c-2cb925182767_split_20260312_101014\processed_data.npz
+2026-03-12 10:10:21 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-12 10:10:21 - ml_platform_api - INFO - 使用模型参数：{}
+2026-03-12 10:10:21 - ml_platform_api - INFO - 开始训练LR模型 | 数据集ID：f1d0caba-fe0e-4e8e-a15c-2cb925182767 | 划分ID：f1d0caba-fe0e-4e8e-a15c-2cb925182767_split_20260312_101014
+2026-03-12 10:10:21 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-12 10:10:21 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-12 10:10:21 - ml_platform_api - INFO - MAE (平均绝对误差)：3.3521
+2026-03-12 10:10:21 - ml_platform_api - INFO - MSE (均方误差)：21.6244
+2026-03-12 10:10:21 - ml_platform_api - INFO - RMSE (均方根误差)：4.6502
+2026-03-12 10:10:21 - ml_platform_api - INFO - R² (决定系数)：0.7588
+2026-03-12 10:10:21 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-12 10:10:21 - ml_platform_api - INFO - MAE (平均绝对误差)：3.2049
+2026-03-12 10:10:21 - ml_platform_api - INFO - MSE (均方误差)：22.3651
+2026-03-12 10:10:21 - ml_platform_api - INFO - RMSE (均方根误差)：4.7292
+2026-03-12 10:10:21 - ml_platform_api - INFO - R² (决定系数)：0.7151
+2026-03-12 10:10:21 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-12 10:10:21 - ml_platform_api - INFO - MAE (平均绝对误差)：3.2806
+2026-03-12 10:10:21 - ml_platform_api - INFO - MSE (均方误差)：25.298
+2026-03-12 10:10:21 - ml_platform_api - INFO - RMSE (均方根误差)：5.0297
+2026-03-12 10:10:21 - ml_platform_api - INFO - R² (决定系数)：0.655
+2026-03-12 10:10:21 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 3.3521,
+      "mse": 21.6244,
+      "rmse": 4.6502,
+      "r2": 0.7588
+},
+      "val": {
+      "mae": 3.2049,
+      "mse": 22.3651,
+      "rmse": 4.7292,
+      "r2": 0.7151
+},
+      "test": {
+      "mae": 3.2806,
+      "mse": 25.298,
+      "rmse": 5.0297,
+      "r2": 0.655
+}
+}
+2026-03-12 10:10:21 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\f1d0caba-fe0e-4e8e-a15c-2cb925182767_split_20260312_101014\LR_model_20260312_101021.pkl
+2026-03-12 10:10:26 - ml_platform_api - INFO - 开始加载预处理数据：./uploads\split_datasets\f1d0caba-fe0e-4e8e-a15c-2cb925182767_split_20260312_101014\processed_data.npz
+2026-03-12 10:10:26 - ml_platform_api - INFO - 数据加载成功 | 训练集：(303, 13) | 验证集：(101, 13) | 测试集：(102, 13)
+2026-03-12 10:10:26 - ml_platform_api - INFO - 使用模型参数：{'n_estimators': 100, 'max_depth': None, 'random_state': 42}
+2026-03-12 10:10:26 - ml_platform_api - INFO - 开始训练random_forest模型 | 数据集ID：f1d0caba-fe0e-4e8e-a15c-2cb925182767 | 划分ID：f1d0caba-fe0e-4e8e-a15c-2cb925182767_split_20260312_101014
+2026-03-12 10:10:27 - ml_platform_api - INFO - 编码后特征列：['numeric__CRIM', 'numeric__ZN', 'numeric__INDUS', 'numeric__CHAS', 'numeric__NOX', 'numeric__RM', 'numeric__AGE', 'numeric__DIS', 'numeric__RAD', 'numeric__TAX', 'numeric__PTRATIO', 'numeric__B', 'numeric__LSTAT']
+2026-03-12 10:10:27 - ml_platform_api - INFO - 
+训练集模型评估指标：
+2026-03-12 10:10:27 - ml_platform_api - INFO - MAE (平均绝对误差)：0.9235
+2026-03-12 10:10:27 - ml_platform_api - INFO - MSE (均方误差)：2.0559
+2026-03-12 10:10:27 - ml_platform_api - INFO - RMSE (均方根误差)：1.4338
+2026-03-12 10:10:27 - ml_platform_api - INFO - R² (决定系数)：0.9771
+2026-03-12 10:10:27 - ml_platform_api - INFO - 
+验证集模型评估指标：
+2026-03-12 10:10:27 - ml_platform_api - INFO - MAE (平均绝对误差)：2.5536
+2026-03-12 10:10:27 - ml_platform_api - INFO - MSE (均方误差)：14.447
+2026-03-12 10:10:27 - ml_platform_api - INFO - RMSE (均方根误差)：3.8009
+2026-03-12 10:10:27 - ml_platform_api - INFO - R² (决定系数)：0.816
+2026-03-12 10:10:27 - ml_platform_api - INFO - 
+测试集模型评估指标：
+2026-03-12 10:10:27 - ml_platform_api - INFO - MAE (平均绝对误差)：2.2776
+2026-03-12 10:10:27 - ml_platform_api - INFO - MSE (均方误差)：11.331
+2026-03-12 10:10:27 - ml_platform_api - INFO - RMSE (均方根误差)：3.3662
+2026-03-12 10:10:27 - ml_platform_api - INFO - R² (决定系数)：0.8455
+2026-03-12 10:10:27 - ml_platform_api - INFO - 随机森林回归特征重要性：
+              特征    重要性
+     numeric__RM 0.5504
+  numeric__LSTAT 0.2815
+    numeric__DIS 0.0481
+   numeric__CRIM 0.0315
+    numeric__TAX 0.0218
+    numeric__AGE 0.0146
+      numeric__B 0.0138
+numeric__PTRATIO 0.0130
+    numeric__NOX 0.0088
+  numeric__INDUS 0.0074
+    numeric__RAD 0.0045
+     numeric__ZN 0.0028
+   numeric__CHAS 0.0017
+2026-03-12 10:10:27 - ml_platform_api - INFO - 模型评估指标：
+{
+      "train": {
+      "mae": 0.9235,
+      "mse": 2.0559,
+      "rmse": 1.4338,
+      "r2": 0.9771
+},
+      "val": {
+      "mae": 2.5536,
+      "mse": 14.447,
+      "rmse": 3.8009,
+      "r2": 0.816
+},
+      "test": {
+      "mae": 2.2776,
+      "mse": 11.331,
+      "rmse": 3.3662,
+      "r2": 0.8455
+}
+}
+2026-03-12 10:10:27 - ml_platform_api - INFO - 模型已保存至：./uploads\split_datasets\f1d0caba-fe0e-4e8e-a15c-2cb925182767_split_20260312_101014\random_forest_model_20260312_101027.pkl
