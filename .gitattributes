@@ -1,1 +1,2 @@
 *.csv filter=lfs diff=lfs merge=lfs -text
+Data/个贷违约/train_internet.csv filter=lfs diff=lfs merge=lfs -text
