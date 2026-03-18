@@ -1,0 +1,5 @@
+2026-03-18 08:53:06 - ml_platform_api - INFO - 数据集上传成功：ID=198b1499-a0e1-459e-be91-c905041fb5e3，文件名=iris.csv（存储为c3b22d30-99d1-454a-984e-68a56ac89bdb.csv）
+2026-03-18 08:55:16 - ml_platform_api - INFO - 数据集上传成功：ID=cd65963f-d03d-45af-869b-fef5ffb00ce3，文件名=iris.csv（存储为3d67a4be-1711-45fd-92f2-c69219bb6940.csv）
+2026-03-18 10:04:07 - ml_platform_api - WARNING - 列species无异常值范围信息，跳过处理
+2026-03-18 10:04:07 - ml_platform_api - INFO - 处理后数据已保存：./uploads\processed\cd65963f-d03d-45af-869b-fef5ffb00ce3_processed_20260318_100407.csv
+2026-03-18 10:04:07 - ml_platform_api - INFO - 数据集cd65963f-d03d-45af-869b-fef5ffb00ce3统一处理完成：处理列=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']，空值方法=mean_cols，异常值方法=save_outlier
