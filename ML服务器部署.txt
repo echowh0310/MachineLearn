@@ -1,0 +1,48 @@
+cat > /tmp/Python-3.11.14/ML/ML/项目部署总结.txt << 'EOF'
+==============================
+机器学习平台 - 服务器部署总结
+==============================
+sudo yum update -y
+安装相关依赖项。。。。。
+一、环境信息
+- 系统：CentOS 7
+- Python：3.9 (Conda 环境 ml39)
+- OpenSSL 3.6.1 27 Jan 2026 (Library: OpenSSL 3.6.1 27 Jan 2026)
+- 框架：FastAPI + Uvicorn
+- 端口：8005
+- 访问IP：82.157.123.219
+
+二、Conda 环境创建
+conda create -n ml39 python=3.9
+conda activate ml39
+
+三、依赖安装
+pip install fastapi uvicorn scikit-learn pandas numpy matplotlib
+pip install xgboost==1.7.6 lightgbm==3.3.5
+pip install python-multipart
+
+四、项目目录结构
+ML/
+├── api/
+│   └── ML.py          # 主程序
+├── schemas/           # 配置模块
+└── templates/
+    └── index.html     # 前端页面
+
+五、启动命令（必须在项目根目录执行）
+cd /tmp/Python-3.11.14/ML/ML
+conda activate ml39
+uvicorn api.ML:app --host 0.0.0.0 --port 8005
+
+六、后台永久运行
+nohup uvicorn api.ML:app --host 0.0.0.0 --port 8005 > server.log 2>&1 &
+
+七、访问地址
+首页：http://82.157.123.219:8005
+接口文档：http://82.157.123.219:8005/docs
+
+八、常见问题说明
+1. xgboost 警告：系统较老，不影响功能
+2. 上传失败：已配置跨域，前端可正常上传
+3. 模块找不到：必须在项目根目录启动
+4. 外网无法访问：检查云服务器安全组放行 8005 端口

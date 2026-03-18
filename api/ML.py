@@ -96,10 +96,17 @@ app.add_middleware(
 )
 
 # ===================== 路由定义 =====================
-# 前端页面路由
-@app.get("/")
-async def read_index():
-    return FileResponse(os.path.join("templates", "index.html"))
+
+from fastapi import Request
+from fastapi.templating import Jinja2Templates  # 模板引擎
+from fastapi.responses import HTMLResponse
+templates = Jinja2Templates(directory="../templates")
+
+# ===================== 页面接口 =====================
+@app.get("/", response_class=HTMLResponse)
+async def read_home(request: Request):
+    # 直接返回 index.html
+    return templates.TemplateResponse("index.html", {"request": request})
 # ===================== 上传数据集接口 =====================
 @app.post("/api/v1/data/upload", response_model=BaseResponse)
 async def upload_file(
