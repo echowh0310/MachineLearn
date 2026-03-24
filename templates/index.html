@@ -3,10 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>机器学习算法平台 - API前端</title>
+    <title>机器学习算法平台</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.2/dist/axios.min.js"></script>
+    <script>
+        // 页面加载时检查认证状态
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('access_token');
+            
+            if (!token) {
+                // 没有token，重定向到登录页面
+                window.location.replace('/');
+                return;
+            }
+            
+            try {
+                // 验证token有效性
+                const response = await axios.get('/api/verify-token', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (response.data.code !== 200) {
+                    // token无效，清除token并重定向到登录页面
+                    localStorage.removeItem('access_token');
+                    localStorage.removeItem('token_type');
+                    localStorage.removeItem('expires_in');
+                    window.location.replace('/');
+                }
+            } catch (error) {
+                // 验证失败，清除token并重定向到登录页面
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('token_type');
+                localStorage.removeItem('expires_in');
+                window.location.replace('/');
+            }
+        });
+        
+        // 设置axios拦截器，自动添加token
+        axios.interceptors.request.use(
+            config => {
+                const token = localStorage.getItem('access_token');
+                if (token) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                }
+                return config;
+            },
+            error => {
+                return Promise.reject(error);
+            }
+        );
+        
+        // 响应拦截器，处理token过期
+        axios.interceptors.response.use(
+            response => {
+                return response;
+            },
+            error => {
+                if (error.response && error.response.status === 401) {
+                    // token过期或无效，清除token并重定向到登录页面
+                    localStorage.removeItem('access_token');
+                    localStorage.removeItem('token_type');
+                    localStorage.removeItem('expires_in');
+                    window.location.replace('/');
+                }
+                return Promise.reject(error);
+            }
+        );
+    </script>
     <style>
         body {
             background-color: #f5f7fa;
@@ -162,7 +228,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center mb-5">机器学习算法平台 - API前端</h1>
+        <h1 class="text-center mb-5">机器学习算法平台</h1>
 
         <!-- Step Navigation -->
         <div class="step-nav mb-5">
@@ -197,7 +263,7 @@
         <!-- Step 1: Upload Dataset -->
         <div class="step-content" id="step1">
             <h2>1. 上传数据集</h2>
-            <form id="uploadForm">
+            <form id="uploadForm" method="post">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">数据集信息</h5>
@@ -495,15 +561,15 @@
                                     <input type="text" class="form-control" id="processed_ID" name="processed_ID" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="form-label" for="class_weight">类别权重</label>
-                                    <select class="form-select" id="class_weight" name="class_weight">
-                                        <option value="balanced">balanced</option>
-                                        <option value="none">none</option>
-                                    </select>
-                                </div>
-                            </div>
+<!--                            <div class="col-md-4">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label class="form-label" for="class_weight">类别权重</label>-->
+<!--                                    <select class="form-select" id="class_weight" name="class_weight">-->
+<!--                                        <option value="balanced">balanced</option>-->
+<!--                                        <option value="none">none</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="form-label" for="remainder">编码器剩余列处理方式</label>
@@ -844,6 +910,118 @@
         let splitId = null;
         let trainResult = null;
         let predictResult = null;
+        const currentOrigin = window.location.origin;
+        console.log("Current origin:", currentOrigin);
+        
+        // Token validation and authentication
+        async function checkAuth() {
+            console.log('=== Starting checkAuth ===');
+            const token = localStorage.getItem('access_token');
+            console.log('Retrieved token:', token ? 'Exists' : 'None');
+            
+            // 立即检查是否有token，没有则立即重定向
+            if (!token) {
+                console.log('No token found, redirecting to login...');
+                // 使用replace()避免浏览器历史记录问题
+                window.location.replace('/');
+                return false;
+            }
+            
+            try {
+                console.log('Token found, verifying validity...');
+                // 验证token有效性，设置超时时间为5秒
+                const response = await axios.get('/api/verify-token', {
+                    timeout: 5000
+                });
+                console.log('Verify token response:', response.data);
+                
+                if (response.data.code === 200) {
+                    console.log('Token is valid, proceeding to main page...');
+                    // 显示主内容，隐藏认证遮罩
+                    return true;
+                } else {
+                    console.log('Token verification failed, response code:', response.data.code);
+                    throw new Error('Token is invalid');
+                }
+            } catch (error) {
+                console.error('Error verifying token:', error);
+                console.log('Clearing invalid token and redirecting to login...');
+                // 清除所有相关存储
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('token_type');
+                localStorage.removeItem('expires_in');
+                // 强制重定向到根路径，根路径会自动处理未登录用户
+                window.location.replace('/');
+                return false;
+            } finally {
+                console.log('=== Finished checkAuth ===');
+            }
+        }
+        
+        // 立即执行checkAuth，不等待DOMContentLoaded
+        console.log('Executing checkAuth immediately...');
+        checkAuth();
+        
+        // Add token to API requests
+        axios.interceptors.request.use(
+            config => {
+                const token = localStorage.getItem('access_token');
+                if (token) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                }
+                return config;
+            },
+            error => {
+                return Promise.reject(error);
+            }
+        );
+        
+        // Handle API response errors
+        axios.interceptors.response.use(
+            response => {
+                return response;
+            },
+            error => {
+                // 处理401 Unauthorized错误
+                if (error.response && error.response.status === 401) {
+                    // token无效或过期，清除token并重定向到登录页面
+                    localStorage.removeItem('access_token');
+                    localStorage.removeItem('token_type');
+                    localStorage.removeItem('expires_in');
+                    window.location.href = '/';
+                }
+                return Promise.reject(error);
+            }
+        );
+        
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('DOMContentLoaded event fired');
+            console.log('Current access_token:', localStorage.getItem('access_token'));
+            await checkAuth();
+        });
+        
+        // Also check auth on page visibility change (e.g., when user returns to tab)
+        document.addEventListener('visibilitychange', async () => {
+            if (document.visibilityState === 'visible') {
+                console.log('Page became visible, checking auth...');
+                await checkAuth();
+            }
+        });
+        
+        // Check auth when window is focused
+        window.addEventListener('focus', async () => {
+            console.log('Window focused, checking auth...');
+            await checkAuth();
+        });
+        
+        // Logout function
+        function logout() {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('token_type');
+            localStorage.removeItem('expires_in');
+            window.location.href = '/';
+        }
 
         // Step 1: Upload Dataset
         document.getElementById('uploadForm').addEventListener('submit', async function(e) {
@@ -851,10 +1029,12 @@
 
             const uploadBtnText = document.getElementById('uploadBtnText');
             const uploadLoading = document.getElementById('uploadLoading');
+            const uploadBtn = this.querySelector('button[type="submit"]');
 
-            // Show loading state
+            // Show loading state and disable button
             uploadBtnText.textContent = '上传中...';
             uploadLoading.style.display = 'inline-block';
+            uploadBtn.disabled = true;
 
             const formData = new FormData();
             formData.append('file', document.getElementById('file').files[0]);
@@ -862,11 +1042,8 @@
             formData.append('outliers_threshold', document.getElementById('outliers_threshold').value);
 
             try {
-                const response = await axios.post('http://localhost:8005/api/v1/data/upload', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                });
+                const response = await axios.post( '/api/v1/data/upload', formData);
+                console.log(window.BACKEND_CONFIG);
 
                 if (response.data.code === 200) {
                     datasetId = response.data.data.dataset_id;
@@ -882,9 +1059,10 @@
             } catch (error) {
                 showMessage('上传失败：' + (error.response?.data?.detail || error.message), 'danger');
             } finally {
-                // Hide loading state
+                // Hide loading state and enable button
                 uploadBtnText.textContent = '上传并验证数据集';
                 uploadLoading.style.display = 'none';
+                uploadBtn.disabled = false;
             }
         });
 
@@ -998,9 +1176,16 @@
 
         // Step 3: Process Data
         async function processData() {
-            const processType = document.querySelector('input[name="process_type"]:checked').value;
+            const processBtn = document.querySelector('button[onclick="processData()"]');
+            const originalText = processBtn.textContent;
+            
+            // Disable button and show loading state
+            processBtn.textContent = '处理中...';
+            processBtn.disabled = true;
 
             try {
+                const processType = document.querySelector('input[name="process_type"]:checked').value;
+
                 if (processType === 'all') {
                     // 所有列统一处理
                     await processAllColumns();
@@ -1010,6 +1195,10 @@
                 }
             } catch (error) {
                 showMessage('处理失败：' + (error.response?.data?.detail || error.message), 'danger');
+            } finally {
+                // Restore button state
+                processBtn.textContent = originalText;
+                processBtn.disabled = false;
             }
         }
 
@@ -1035,7 +1224,7 @@
             };
 
             try {
-                const response = await axios.post(`http://localhost:8005/api/v1/data/${datasetId}/process/all`, requestBody);
+                const response = await axios.post(`/api/v1/data/${datasetId}/process/all`, requestBody);
 
                 if (response.data && response.data.code === 200 && response.data.data) {
                     processedId = response.data.data.processed_ID;
@@ -1100,7 +1289,7 @@
             };
 
             try {
-                const response = await axios.post(`http://localhost:8005/api/v1/data/${datasetId}/columns/process`, requestBody);
+                const response = await axios.post(`/api/v1/data/${datasetId}/columns/process`, requestBody);
 
                 if (response.data && response.data.code === 200 && response.data.data) {
                     processedId = response.data.data.processed_ID;
@@ -1171,6 +1360,13 @@
         document.getElementById('splitForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            const splitBtn = this.querySelector('button[type="submit"]');
+            const originalText = splitBtn.textContent;
+            
+            // Show loading state and disable button
+            splitBtn.textContent = '执行中...';
+            splitBtn.disabled = true;
+
             const splitParams = {
                 test_size: parseFloat(document.getElementById('test_size').value),
                 val_size: parseFloat(document.getElementById('val_size').value),
@@ -1180,13 +1376,13 @@
                 feature_cols: Array.from(document.getElementById('feature_cols').selectedOptions).map(option => option.value),
                 onehot_encode_cols: Array.from(document.getElementById('onehot_encode_cols').selectedOptions).map(option => option.value),
                 ordinal_encode_cols: Array.from(document.getElementById('ordinal_encode_cols').selectedOptions).map(option => option.value),
-                class_weight: document.getElementById('class_weight').value,
+                // class_weight: document.getElementById('class_weight').value,
                 is_standard: document.getElementById('is_standard').value === 'true',
                 remainder: document.getElementById('remainder').value
             };
 
             try {
-                const response = await axios.post(`http://localhost:8005/api/v1/data/${datasetId}/split`, splitParams);
+                const response = await axios.post(`/api/v1/data/${datasetId}/split`, splitParams);
 
                 splitId = response.data.data.split_id;
                 const splitSummary = document.getElementById('splitSummary');
@@ -1206,6 +1402,10 @@
                 splitResults.style.display = 'block';
             } catch (error) {
                 showMessage('划分失败：' + (error.response?.data?.detail || error.message), 'danger');
+            } finally {
+                // Hide loading state and enable button
+                splitBtn.textContent = originalText;
+                splitBtn.disabled = false;
             }
         });
 
@@ -1272,6 +1472,24 @@
                 navItems[3].classList.add('completed');
                 navItems[4].classList.add('completed');
                 navItems[5].classList.add('active');
+
+                // Set dataset ID and split ID if available
+                if (splitId) {
+                    document.getElementById('file_split_id').value = splitId;
+                }
+                 if (filemodelpath) {
+                    document.getElementById('file_model_path').value = filemodelpath;
+                }
+                if (metainfopath) {
+                    document.getElementById('file_meta_info_path').value = metainfopath;
+                }
+                 if (filemodelpath) {
+                    document.getElementById('json_model_path').value = filemodelpath;
+                }
+                 if (metainfopath) {
+                    document.getElementById('json_meta_info_path').value = metainfopath;
+                }
+
             }
         }
 
@@ -1382,6 +1600,13 @@
         document.getElementById('trainForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            const trainBtn = this.querySelector('button[type="submit"]');
+            const originalText = trainBtn.textContent;
+            
+            // Show loading state and disable button
+            trainBtn.textContent = '训练中...';
+            trainBtn.disabled = true;
+
             const problemType = document.getElementById('problem_type').value;
             const modelType = document.getElementById('model_type').value;
             const trainSplitId = document.getElementById('train_split_id').value;
@@ -1405,7 +1630,7 @@
             };
 
             try {
-                const response = await axios.post(`http://localhost:8005/api/v1/models/${problemType}/${modelType}/train`, trainRequest);
+                const response = await axios.post(`/api/v1/models/${problemType}/${modelType}/train`, trainRequest);
 
                 if (response.data && response.data.code === 200 && response.data.data) {
                     trainResult = response.data.data;
@@ -1416,6 +1641,10 @@
                 }
             } catch (error) {
                 showMessage('训练失败：' + (error.response?.data?.msg || error.message), 'danger');
+            } finally {
+                // Hide loading state and enable button
+                trainBtn.textContent = originalText;
+                trainBtn.disabled = false;
             }
         });
 
@@ -1423,6 +1652,8 @@
         function displayTrainResults(results) {
             const trainSummary = document.getElementById('trainSummary');
             const trainResults = document.getElementById('trainResults');
+            filemodelpath = results.model_save_path
+            metainfopath = results.meta_info_path
 
             if (!results) {
                 trainSummary.innerHTML = '<p class="text-danger">训练结果为空，请检查训练配置和API响应</p>';
@@ -1576,6 +1807,13 @@
         document.getElementById('jsonPredictForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            const jsonPredictBtn = this.querySelector('button[type="submit"]');
+            const originalText = jsonPredictBtn.textContent;
+            
+            // Show loading state and disable button
+            jsonPredictBtn.textContent = '预测中...';
+            jsonPredictBtn.disabled = true;
+
             try {
                 const problem_type = document.getElementById('json_problem_type').value;
                 const model_type = document.getElementById('json_model_type').value;
@@ -1602,7 +1840,7 @@
                 };
 
                 const response = await axios.post(
-                    `http://localhost:8005/api/v1/models/${problem_type}/${model_type}/predict`,
+                    `/api/v1/models/${problem_type}/${model_type}/predict`,
                     predictRequest
                 );
 
@@ -1615,12 +1853,23 @@
                 }
             } catch (error) {
                 showMessage('预测失败：' + (error.response?.data?.msg || error.message), 'danger');
+            } finally {
+                // Hide loading state and enable button
+                jsonPredictBtn.textContent = originalText;
+                jsonPredictBtn.disabled = false;
             }
         });
 
         // 文件上传预测表单提交
         document.getElementById('filePredictForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            const filePredictBtn = this.querySelector('button[type="submit"]');
+            const originalText = filePredictBtn.textContent;
+            
+            // Show loading state and disable button
+            filePredictBtn.textContent = '预测中...';
+            filePredictBtn.disabled = true;
 
             try {
                 const formData = new FormData();
@@ -1633,13 +1882,8 @@
                 const model_type = document.getElementById('file_model_type').value;
 
                 const response = await axios.post(
-                    `http://localhost:8005/api/v1/models/${problem_type}/${model_type}/file_predict`,
-                    formData,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    }
+                    `/api/v1/models/${problem_type}/${model_type}/file_predict`,
+                    formData
                 );
 
                 if (response.data && response.data.code === 200) {
@@ -1651,6 +1895,10 @@
                 }
             } catch (error) {
                 showMessage('预测失败：' + (error.response?.data?.msg || error.message), 'danger');
+            } finally {
+                // Hide loading state and enable button
+                filePredictBtn.textContent = originalText;
+                filePredictBtn.disabled = false;
             }
         });
 
@@ -1715,7 +1963,7 @@
                     <div class="row mt-4">
                         <div class="col-md-12">
                             <h6>预测概率</h6>
-                            <pre>${JSON.stringify(results.probabilities.slice(0, 5), null, 2)}${results.probabilities.length > 5 ? '...' : ''}</pre>
+                            <pre>${JSON.stringify(results.probabilities.slice(0, 10), null, 4)}${results.probabilities.length > 5 ? '...' : ''}</pre>
                         </div>
                     </div>
                 `;
@@ -1725,5 +1973,5 @@
             predictResults.style.display = 'block';
         }
     </script>
-</body>
+    </body>
 </html>

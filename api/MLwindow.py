@@ -1,32 +1,38 @@
 import uuid
 import os
 import sys
-from datetime import datetime
 import pandas as pd
 
 # 导入FastAPI相关依赖
-from fastapi import FastAPI, UploadFile, File, HTTPException, Body, Form, Path
+from fastapi import FastAPI, UploadFile, File, HTTPException, Body, Form, Path, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.security import HTTPBearer
+from jose import JWTError, jwt
+from datetime import datetime, timedelta
 
 # 添加项目根目录到系统路径，模块搜索
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(ROOT_DIR)
 
 # 导入目录配置
-from schemas.env_config import (
+from api.schemas.env_config import (
     UPLOAD_DIR, PROCESSED_DIR,
     SAVE_DIR, LOG_DIR,
-    API_PORT, MAX_FILE_SIZE
+    API_PORT, ORIGIN,
+    MAX_FILE_SIZE
 )
 # 创建必要目录
 for dir_path in [UPLOAD_DIR, PROCESSED_DIR, SAVE_DIR, LOG_DIR]:
     if not os.path.exists(dir_path):
         os.makedirs(dir_path, exist_ok=True)
 
+# 导入JWT配置
+from api.schemas.jwt_config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, ACCESS_TOKEN_EXPIRE_DAYS
+
 # 导入请求响应模型
-from schemas.base import BaseResponse
-from schemas.data import (
+from api.schemas.base import BaseResponse
+from api.schemas.data import (
     DatasetColumnsResponse,
     ColumnsProcessRequest,
     AllColumnsProcessRequest,
@@ -34,10 +40,12 @@ from schemas.data import (
     SplitParams,
     SplitDatasetResponse
 )
-from schemas.models import TrainRequest, TrainResponse
+from api.schemas.models import TrainRequest, TrainResponse
+
 # 导入模型参数及映射
 from api.schemas.modelparam import CLASSIFICATION_MODELS, REGRESSION_MODELS, DEFAULT_MODEL_PARAMS
-
+# 认证模型
+from api.schemas.login import Token, TokenData, UserInDB, LoginRequest
 # 导入自定义模块
 from core.utils.logger import setup_logger
 from core.utils.jsonencoder import CustomJSONEncoder
@@ -45,6 +53,9 @@ from core.utils.jsonencoder import CustomJSONEncoder
 from core.data_processing.data_loader import DataLoader
 from core.data_processing.dataset_splitter import DatasetSplitter
 from core.model.evaluate_model import ModelEvaluator
+# 从login_model导入密码哈希函数，确保生成和验证使用同一个pwd_context
+from core.login.login_model import authenticate_user, create_access_token, get_user, get_password_hash
+
 
 loader = DataLoader()
 dataset_splitter = DatasetSplitter()
@@ -72,12 +83,42 @@ if sys.platform == "win32":
         # 兼容无UTF-8区域设置的系统
         locale.setlocale(locale.LC_ALL, '')
 
+
+
+# 用户数据库 - 动态生成密码哈希
+from api.schemas.users_db import users_db
+
+
 #  初始化FastAPI app
 app = FastAPI(
     title="机器学习算法平台API",
     description="提供数据集上传、处理、划分和训练等功能的API",
     version="1.0.0"
 )
+
+# 认证依赖项
+token_auth_scheme = HTTPBearer()
+
+
+# 验证token
+async def decode_and_verify_token(token: str):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="无法验证凭证",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+        return username
+    except JWTError:
+        raise credentials_exception
+
+# 获取当前用户
+async def get_current_user(token: str = Depends(token_auth_scheme)):
+    return await decode_and_verify_token(token.credentials)
 
 # 配置CORS允许跨域
 origins = [
@@ -88,7 +129,8 @@ origins = [
 # 统一CORS配置
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  #特定域名
+    # allow_origins=origins,
+    allow_origins=["*"],#特定域名
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],  # 方法
     allow_headers=["Content-Type", "Authorization"],  # 常用头部
@@ -100,19 +142,104 @@ app.add_middleware(
 from fastapi import Request
 from fastapi.templating import Jinja2Templates  # 模板引擎
 from fastapi.responses import HTMLResponse
-templates = Jinja2Templates(directory="../templates")
+# templates = Jinja2Templates(directory="../templates")
+# 使用绝对路径确保模板文件能被正确找到
+import os
+import jinja2
+TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "templates")
 
-# ===================== 页面接口 =====================
+# 创建Jinja2环境，禁用缓存
+templates = Jinja2Templates(directory=TEMPLATES_DIR)
+
+
+# ===================== 登录接口 =====================
+@app.post("/api/login", response_model=Token)
+async def login(login_request: LoginRequest):
+    """登录接口"""
+    # 验证用户
+    user = authenticate_user(users_db, login_request.username, login_request.password)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="账号或密码错误",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    # 设置token过期时间
+    if login_request.remember:
+        # 记住我：7天过期
+        access_token_expires = timedelta(days=ACCESS_TOKEN_EXPIRE_DAYS)
+    else:
+        # 不记住我：30分钟过期
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    
+    # 创建token
+    access_token = create_access_token(
+        data={"sub": user.username},
+        expires_delta=access_token_expires
+    )
+    
+    # 返回token信息
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "expires_in": int(access_token_expires.total_seconds())
+    }
+
+# ===================== Token验证接口 =====================
+@app.get("/api/verify-token")
+async def verify_token(current_user: str = Depends(get_current_user)):
+    logger.info(f"username: {current_user}")
+    """验证token有效性接口"""
+    return {
+        "code": 200,
+        "msg": "Token is valid",
+        "data": {"username": current_user}
+    }
+
+# ===================== 根路径处理 =====================
 @app.get("/", response_class=HTMLResponse)
-async def read_home(request: Request):
-    # 直接返回 index.html
-    return templates.TemplateResponse("index.html", {"request": request})
+async def root(request: Request):
+    """根路径，根据认证状态返回登录页面或主应用页面"""
+    # 对于根路径访问，直接返回登录页面
+    return templates.TemplateResponse("login.html", {"request": request})
+
+# ===================== 主应用页面 =====================
+@app.get("/app", response_class=HTMLResponse)
+async def app_page(request: Request):
+    """主应用页面，已登录用户才能访问"""
+    # 获取Authorization头
+    auth_header = request.headers.get("Authorization")
+    token = None
+    
+    # 检查是否有Bearer令牌
+    if auth_header and auth_header.startswith("Bearer "):
+        token = auth_header.split(" ")[1]
+    
+    # 从查询参数获取token（如果有）
+    if not token:
+        token = request.query_params.get("token")
+    
+    # 检查localStorage中的令牌需要通过前端处理，这里只处理请求头和查询参数中的令牌
+    if not token:
+        return templates.TemplateResponse("login.html", {"request": request})
+    
+    try:
+        # 验证令牌
+        await decode_and_verify_token(token)
+        # 令牌有效，返回主应用页面，该页面默认显示数据上传界面
+        return templates.TemplateResponse("index.html", {"request": request})
+    except HTTPException:
+        # 令牌无效，返回登录页面
+        return templates.TemplateResponse("login.html", {"request": request})
+
 # ===================== 上传数据集接口 =====================
 @app.post("/api/v1/data/upload", response_model=BaseResponse)
 async def upload_file(
         file: UploadFile = File(..., description="待上传的数据集文件（csv/xlsx/json）"),
         outliers_method: str = Form(default="iqr", description="异常值检测方法：iqr/std/z_score"),
-        outliers_threshold: float = Form(default=1.5, description="异常值检测阈值：iqr=1.5/3；std/z_score=3")
+        outliers_threshold: float = Form(default=1.5, description="异常值检测阈值：iqr=1.5/3；std/z_score=3"),
+        current_user: str = Depends(get_current_user)
 ):
     """
     上传数据集并完成数据质量验证
@@ -206,7 +333,10 @@ async def upload_file(
 
 # ===================== 获取数据集列名接口 =====================
 @app.get("/api/v1/data/{dataset_id}/columns", response_model=DatasetColumnsResponse)
-async def get_dataset_columns(dataset_id: str):
+async def get_dataset_columns(
+        dataset_id: str,
+        current_user: str = Depends(get_current_user)
+):
     """
     根据数据集ID获取数据集的列名列表
     :param dataset_id: 数据集唯一标识
@@ -236,7 +366,8 @@ async def get_dataset_columns(dataset_id: str):
 @app.post("/api/v1/data/{dataset_id}/columns/process", response_model=BaseResponse)
 async def process_columns(
         dataset_id: str,
-        process_request: ColumnsProcessRequest = Body(..., description="多列自定义处理配置，支持选择部分列进行处理")
+        process_request: ColumnsProcessRequest = Body(..., description="多列自定义处理配置，支持选择部分列进行处理"),
+        current_user: str = Depends(get_current_user)
 ):
     """
     支持为不同列配置不同的处理方案，处理空值和异常值
@@ -495,7 +626,8 @@ async def process_columns(
 @app.post("/api/v1/data/{dataset_id}/process/all", response_model=BaseResponse)
 async def process_all_columns(
         dataset_id: str,
-        process_request: AllColumnsProcessRequest = Body(..., description="列统一处理配置，支持选择部分列进行处理")
+        process_request: AllColumnsProcessRequest = Body(..., description="列统一处理配置，支持选择部分列进行处理"),
+        current_user: str = Depends(get_current_user)
 ):
     """
     对选择的列名同时进行统一的空值和异常值处理
@@ -612,7 +744,7 @@ async def process_all_columns(
             outliers_range = updated_outliers_info_col.get("null_outliers_range")
 
             if outliers_range is None:
-                logger.warning(f"列{col}无异常值范围信息，跳过处理")
+                logger.info(f"列{col}无异常值范围信息，跳过处理")
                 outliers_process_result["columns_detail"][col] = {
                     "original_outliers_count": 0,
                     "processed_outliers_count": 0,
@@ -754,7 +886,8 @@ async def process_all_columns(
 @app.post("/api/v1/data/{dataset_id}/split", response_model=BaseResponse)
 async def split_dataset(
         dataset_id: str,
-        split_params: SplitParams = Body(..., description="数据集划分参数")
+        split_params: SplitParams = Body(..., description="数据集划分参数"),
+        current_user: str = Depends(get_current_user)
 ):
     """
     数据集划分接口：优先通过处理后数据集ID加载数据，支持训练/验证/测试集划分
@@ -962,12 +1095,12 @@ async def split_dataset(
         if numeric_cols and is_standard:
             transformers.append(('numeric', StandardScaler(), numeric_cols))
         elif numeric_cols and not is_standard:
-            transformers.append(('numeric_passthrough', 'passthrough', numeric_cols))
+            transformers.append(('numeric_passthrough', remainder, numeric_cols))
 
         # 初始化预处理器
         preprocessor = ColumnTransformer(
             transformers=transformers,
-            remainder='drop', #     remainder=remainder
+            remainder=remainder,
             verbose_feature_names_out=True  # 保留特征名前缀，便于后续匹配
         )
 
@@ -975,6 +1108,10 @@ async def split_dataset(
         X_raw = raw_data[all_feature_cols]
         # 拟合并转换整个数据集
         X_processed = preprocessor.fit_transform(X_raw)
+
+        logger.info(f"编码器剩余列处理方式：remainder = {remainder}")
+        feature_names = preprocessor.get_feature_names_out()
+        logger.info(f"处理后的特征名称: {list(feature_names)}")
 
         # ========== 正确提取各特征列的编码映射关系 ==========
         # 先定义存储编码映射的字典
@@ -1404,7 +1541,8 @@ import numpy as np
 async def train_model(
         problem_type: str = Path(..., description="问题类型（classification/regression）"),
         model_type: str = Path(..., description="模型类型（random_forest/xgboost/lightgbm/svm等）"),
-        train_request: TrainRequest = Body(..., description="训练请求参数")
+        train_request: TrainRequest = Body(..., description="训练请求参数"),
+        current_user: str = Depends(get_current_user)
 ):
     """
     模型训练接口：支持分类和回归任务，多种算法模型
@@ -1621,12 +1759,13 @@ async def train_model(
 
 
 # ========== 模型预测接口(字段) ==========
-from schemas.models import PredictRequest
+from api.schemas.models import PredictRequest
 @app.post("/api/v1/models/{problem_type}/{model_type}/predict", response_model=BaseResponse)
 async def predict_from_json(
         problem_type: str = Path(..., description="问题类型（classification/regression）"),
         model_type: str = Path(..., description="模型类型（random_forest/xgboost/lightgbm/svm等）"),
-        predict_request: PredictRequest = Body(..., description="预测请求参数")
+        predict_request: PredictRequest = Body(..., description="预测请求参数"),
+        current_user: str = Depends(get_current_user)
 ):
     """
     模型预测接口：支持分类和回归任务的模型预测
@@ -1782,7 +1921,8 @@ async def predict_from_file(
         split_id: str = Form(..., description="划分数据集ID"),
         model_path: str = Form(..., description="模型文件路径"),
         meta_info_path: str = Form(..., description="元信息文件路径"),
-        file: UploadFile = File(..., description="预测文件：csv / xlsx / xls")
+        file: UploadFile = File(..., description="预测文件：csv / xlsx / xls"),
+        current_user: str = Depends(get_current_user)
 ):
     if problem_type not in ["classification", "regression"]:
         return {
@@ -1903,4 +2043,4 @@ async def predict_from_file(
 # ===================== 主函数 =====================
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=API_PORT)
+    uvicorn.run(app, host=ORIGIN, port=API_PORT)
